@@ -279,11 +279,14 @@ header .subheading2 {
     });
   });
 
-  // 오버레이 클릭 시 팝업 닫기
-  document.getElementById('image-popup-overlay').addEventListener('click', () => {
+
+  // 오버레이나 이미지 클릭 시 팝업 닫기
+  const closePopup = () => {
     document.getElementById('image-popup').classList.remove('show');
     document.getElementById('image-popup-overlay').classList.remove('show');
-  });
+  };
+  document.getElementById('image-popup-overlay').addEventListener('click', closePopup);
+  document.getElementById('popup-img').addEventListener('click', closePopup);
 </script>
 </body>
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나의 갤러리</title>
+<style>
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+  }
+  header {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
+  .gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  @media (max-width: 768px) {
+    header {
+      font-size: 1.2rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>나의 갤러리</h1>
+</header>
+
+<main>
+  <div class="gallery">
+    <img src="https://placekitten.com/300/200" alt="샘플 이미지 1">
+    <img src="https://placekitten.com/301/200" alt="샘플 이미지 2">
+    <img src="https://placekitten.com/302/200" alt="샘플 이미지 3">
+    <img src="https://placekitten.com/303/200" alt="샘플 이미지 4">
+  </div>
+</main>
+
+</body>
+</html>

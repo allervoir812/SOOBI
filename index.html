@@ -138,6 +138,12 @@ header .subheading2 {
   display: none;
 }
 
+#image-popup.show,
+#image-popup-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 </style>
 </head>
 <body>
@@ -254,7 +260,6 @@ header .subheading2 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   ">
 </div>
-
 
 <script>
   function updateDday() {

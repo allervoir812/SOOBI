@@ -83,7 +83,10 @@ header .subheading2 {
   transform: rotateY(180deg);
   padding: 10px;
   box-sizing: border-box;
-  font-size: 0.8rem;
+  font-size: 1rem; 
+  font-weight: 600;
+  text-align: left;
+  flex-direction: column;
 }
 .gallery {
   display: grid;
@@ -228,7 +231,7 @@ header .subheading2 {
   updateDday();
   setInterval(updateDday, 1000 * 60 * 60); // 1시간마다 갱신
 
-    // 🔴추가: 클릭 시 카드가 뒤집히도록 toggle
+    // 클릭 시 카드가 뒤집히도록 toggle
   document.querySelectorAll('.flip-card').forEach(card => { 
     card.addEventListener('click', () => { 
       card.classList.toggle('flipped'); 

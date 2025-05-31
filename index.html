@@ -114,6 +114,13 @@ header .subheading2 {
     font-size: 1.5rem;
   }
 }
+#image-popup {
+  background: transparent; 
+}
+
+#popup-caption {
+  display: none;
+}
 </style>
 </head>
 <body>
@@ -243,25 +250,22 @@ header .subheading2 {
     }); 
   });
 
-  // 🔴 두번째 소제목 하위의 사진들만 팝업으로 띄우기
-  document.querySelectorAll('main .gallery a').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const imgSrc = link.querySelector('img').src;
-      const popup = document.getElementById('image-popup');
-      const popupImg = document.getElementById('popup-img');
-      const caption = document.getElementById('popup-caption');
-
-      popupImg.src = imgSrc;
-      caption.textContent = link.querySelector('img').alt || '사진 설명이 없어요!';
-      popup.style.display = 'block';
-    });
+  // 두번째 소제목 하위의 사진들만 팝업으로 띄우기
+document.querySelectorAll('main .gallery a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const imgSrc = link.querySelector('img').src;
+    const popup = document.getElementById('image-popup');
+    const popupImg = document.getElementById('popup-img');
+    popupImg.src = imgSrc;
+    popup.style.display = 'block';
   });
+});
 
-  // 🔴 팝업 클릭 시 닫기
-  document.getElementById('image-popup').addEventListener('click', () => {
-    document.getElementById('image-popup').style.display = 'none';
-  });
+// 팝업 클릭 시 닫기
+document.getElementById('image-popup').addEventListener('click', () => {
+  document.getElementById('image-popup').style.display = 'none';
+});
 </script>
 </body>
 </html>

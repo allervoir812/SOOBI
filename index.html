@@ -115,24 +115,36 @@ header .subheading2 {
   }
 }
 
-#image-popup {
-  width : 100vw;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
+#image-popup,
 #image-popup-overlay {
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
+
 #image-popup.show,
 #image-popup-overlay.show {
   opacity: 1;
   pointer-events: auto;
 }
-#popup-caption {
-  display: none;
+
+#image-popup {
+  position: fixed; 
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  z-index: 9999;
+  text-align: center;
+}
+
+#popup-img {
+  width: 100vw;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 </style>
 </head>
@@ -224,31 +236,11 @@ header .subheading2 {
   width: 100%; height: 100%;
   background: rgba(0, 0, 0, 0.3);
   z-index: 9998;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
 "></div>
 
 <!-- 팝업 이미지 -->
-<div id="image-popup" style="
-  position: fixed; 
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: transparent;
-  z-index: 9999;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-">
-  <img id="popup-img" src="" style="
-    width: 100vw; 
-    height: auto;
-    border-radius: 12px;
-    display: block;
-    margin: 0 auto;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  ">
+<div id="image-popup">
+  <img id="popup-img" src="">
 </div>
 
 <script>
@@ -276,27 +268,22 @@ header .subheading2 {
     }); 
   });
 
-  // 두번째 소제목 하위의 사진들만 팝업으로 띄우기
-  document.querySelectorAll('main .gallery a').forEach(link => {
+  // 이미지 클릭 시 팝업 띄우기
+  document.querySelectorAll('.gallery a').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       const imgSrc = link.querySelector('img').src;
-      const popup = document.getElementById('image-popup');
-      const overlay = document.getElementById('image-popup-overlay');
-      const popupImg = document.getElementById('popup-img');
-      popupImg.src = imgSrc;
-      popup.classList.add('show');
-      overlay.classList.add('show');
+      document.getElementById('popup-img').src = imgSrc;
+      document.getElementById('image-popup').classList.add('show');
+      document.getElementById('image-popup-overlay').classList.add('show');
     });
   });
 
-  // 오버레이나 팝업 이미지 클릭 시 닫기
-  const closePopup = () => {
+  // 오버레이 클릭 시 팝업 닫기
+  document.getElementById('image-popup-overlay').addEventListener('click', () => {
     document.getElementById('image-popup').classList.remove('show');
     document.getElementById('image-popup-overlay').classList.remove('show');
-  };
-  document.getElementById('image-popup-overlay').addEventListener('click', closePopup);
-  document.getElementById('popup-img').addEventListener('click', closePopup);
+  });
 </script>
 </body>
 </html>

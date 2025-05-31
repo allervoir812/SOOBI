@@ -221,31 +221,7 @@ header .subheading2 {
   <span id="dday-count"></span>
 </div>
 
-<!-- 팝업 위젯 HTML -->
-<div id="image-popup" style="
-  display: none; 
-  position: fixed; 
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%);
-  max-width: 100%; 
-  max-height: 100%;
-  background: transparent; 
-  z-index: 9999;
-  text-align: center;
-  padding: 0;
-  box-sizing: border-box;
-">
-<img id="popup-img" src="" alt="팝업 이미지" style="
-    width: 100%; 
-    height: auto;
-    display: block;
-    border-radius: 8;
-    margin: 0 auto;
- ">
-</div>
-
-<!-- 팝업 오버레이 추가 -->
+<!-- 🔴 팝업 오버레이 -->
 <div id="image-popup-overlay" style="
   position: fixed; 
   top: 0; left: 0;
@@ -257,13 +233,11 @@ header .subheading2 {
   pointer-events: none;
 "></div>
 
-<!-- 팝업 이미지 -->
+<!-- 🔴 팝업 이미지 -->
 <div id="image-popup" style="
   position: fixed; 
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 100%;
-  max-height: 100%;
   background: transparent;
   z-index: 9999;
   text-align: center;
@@ -272,7 +246,7 @@ header .subheading2 {
   pointer-events: none;
 ">
   <img id="popup-img" src="" style="
-    width: 100vw; /* 모바일에서 화면 꽉 채우기 */
+    width: 100vw; /* 모바일에서 가로폭 꽉 채우기 */
     height: auto;
     border-radius: 12px;
     display: block;
@@ -291,11 +265,11 @@ header .subheading2 {
 
     const ddayCount = document.getElementById('dday-count');
     if (diffDays > 0) {
-      ddayCount.textContent = `❤ D-${diffDays}`;
+      ddayCount.textContent = `D-${diffDays}`;
     } else if (diffDays === 0) {
       ddayCount.textContent = 'D-Day';
     } else {
-      ddayCount.textContent = `❤ D+${Math.abs(diffDays)}`;
+      ddayCount.textContent = `D+${Math.abs(diffDays)}`;
     }
   }
   updateDday();

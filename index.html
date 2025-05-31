@@ -193,9 +193,29 @@ header .subheading2 {
     <a href="images/1.jpg"><img src="images/1.jpg"></a>
     <a href="images/2.jpg"><img src="images/2.jpg"></a>
     <a href="images/3.jpg"><img src="images/3.jpg"></a>
+    <a href="images/4.jpg"><img src="images/4.jpg"></a>
+    <a href="images/5.jpg"><img src="images/5.jpg"></a>
+    <a href="images/6.jpg"><img src="images/6.jpg"></a>
   </div>
 </main>
-  
+
+
+<!-- D-Day 위젯 -->
+<div id="dday-widget" style="
+  position: fixed; 
+  top: 10px; 
+  right: 10px; 
+  background: rgba(114, 156, 112, 0.9); 
+  color: #fff; 
+  padding: 4px 8px;
+  border-radius: 8px; 
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: 'Lato', sans-serif; 
+  z-index: 999;">
+  <span id="dday-count"></span>
+</div>
+
 <!-- 팝업 오버레이 -->
 <div id="image-popup-overlay" style="
   position: fixed; 
@@ -211,6 +231,26 @@ header .subheading2 {
 </div>
 
 <script>
+
+  // 디데이 위젯
+    function updateDday() {
+    const targetDate = new Date('2026-02-08T00:00:00');
+    const today = new Date();
+    const diffTime = targetDate - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    const ddayCount = document.getElementById('dday-count');
+    if (diffDays > 0) {
+      ddayCount.textContent = D-${diffDays};
+    } else if (diffDays === 0) {
+      ddayCount.textContent = 'D-Day';
+    } else {
+      ddayCount.textContent = D+${Math.abs(diffDays)};
+    }
+  }
+  updateDday();
+  setInterval(updateDday, 1000 * 60 * 60);
+
   // flip 카드 토글
   document.querySelectorAll('.flip-card').forEach(card => { 
     card.addEventListener('click', () => { 
@@ -230,10 +270,13 @@ header .subheading2 {
   });
 
   // 오버레이 클릭 시 팝업 닫기
-  document.getElementById('image-popup-overlay').addEventListener('click', () => {
+  const closePopup = () => {
     document.getElementById('image-popup').classList.remove('show');
     document.getElementById('image-popup-overlay').classList.remove('show');
-  });
+  };
+
+  document.getElementById('image-popup-overlay').addEventListener('click', closePopup);
+  document.getElementById('popup-img').addEventListener('click', closePopup); // ⭐️ 추가: 팝업 이미지 클릭 시 닫기
 </script>
 </body>
 </html>

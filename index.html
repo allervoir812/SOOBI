@@ -28,15 +28,16 @@ header {
   line-height: 1.0; /* 줄간격을 기본보다 조금 좁게! */
 }
 header .subheading {
-  position: relative; /* 하이라이트용 가상요소 위치 설정 */
-  display: inline-block; /* 가상요소 크기 맞추기 */
-  font-size: 1.0rem;
+  position: relative;
+  display: inline-block;
+  font-size: 0.9rem;
   font-weight: 500;
-  text-align: left;
   margin: 0;
   margin-top: 200px;
-  padding-left: 1rem;
+  padding-left: 0.5rem; /* 좌측 간격 좁게 */
   color: #729C70;
+  width: 100%; /* 전체 너비 차지 */
+  text-align: left; /* 좌측 정렬 */
 }
 .gallery {
   display: grid;
@@ -69,7 +70,7 @@ header .subheading {
 
 <header>
   <h1>Sungsoo<br>&<br>Hanbi</h1>
-  <p class="subheading">💛우리의 소중한 순간들💛</p>
+  <p class="subheading">💛 우리의 소중한 순간들</p>
 </header>
 
 <main>

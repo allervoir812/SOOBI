@@ -95,11 +95,11 @@ header {
 
     const ddayCount = document.getElementById('dday-count');
     if (diffDays > 0) {
-      ddayCount.textContent = `-${diffDays}일`;
+      ddayCount.textContent = `-${diffDays}`;
     } else if (diffDays === 0) {
       ddayCount.textContent = '오늘!';
     } else {
-      ddayCount.textContent = `+${Math.abs(diffDays)}일`;
+      ddayCount.textContent = `+${Math.abs(diffDays)}`;
     }
   }
 

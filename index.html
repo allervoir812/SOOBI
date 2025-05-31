@@ -81,5 +81,31 @@ header {
   </div>
 </main>
 
+<!-- D-Day 위젯 -->
+<div id="dday-widget" style="position: fixed; top: 10px; right: 10px; background: rgba(255, 107, 107, 0.9); color: #fff; padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; font-family: 'Lato', sans-serif; z-index: 999;">
+  D-Day: <span id="dday-count"></span>
+</div>
+
+<script>
+  function updateDday() {
+    const targetDate = new Date('2026-02-08T00:00:00'); // 디데이
+    const today = new Date();
+    const diffTime = targetDate - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    const ddayCount = document.getElementById('dday-count');
+    if (diffDays > 0) {
+      ddayCount.textContent = `-${diffDays}일`;
+    } else if (diffDays === 0) {
+      ddayCount.textContent = '오늘!';
+    } else {
+      ddayCount.textContent = `+${Math.abs(diffDays)}일`;
+    }
+  }
+
+  updateDday();
+  setInterval(updateDday, 1000 * 60 * 60); // 1시간마다 갱신
+</script>
+  
 </body>
 </html>

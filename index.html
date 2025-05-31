@@ -38,19 +38,6 @@ header .subheading {
   padding-left: 1rem;
   color: #729C70;
 }
-header .subheading::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0.1em; /* 글씨 아래에 살짝 표시 */
-  width: 100%;
-  height: 0.6em; /* 형광펜 굵기 */
-  background: rgba(255, 255, 0, 0.4); /* 투명한 노란 형광펜 느낌 */
-  z-index: -1; /* 글씨 뒤로 보내기 */
-  border-radius: 2px;
-}
-
-  
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));

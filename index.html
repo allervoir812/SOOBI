@@ -93,15 +93,14 @@ header {
     const diffTime = targetDate - today;
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    const ddayCount = document.getElementById('dday-count');
-    if (diffDays > 0) {
-      ddayCount.textContent = `-${diffDays}`;
-    } else if (diffDays === 0) {
-      ddayCount.textContent = '오늘!';
-    } else {
-      ddayCount.textContent = `+${Math.abs(diffDays)}`;
-    }
+  if (diffDays > 0) {
+    ddayCount.textContent = `D-${diffDays}`; // 여기!
+  } else if (diffDays === 0) {
+    ddayCount.textContent = 'D-Day'; // 여기!
+  } else {
+    ddayCount.textContent = `D+${Math.abs(diffDays)}`; // 여기!
   }
+                        }
 
   updateDday();
   setInterval(updateDday, 1000 * 60 * 60); // 1시간마다 갱신

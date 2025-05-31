@@ -78,7 +78,7 @@ header .subheading2 {
   background-color: #8BBB89;
   color: white;
   display: flex;
-  align-items: flex-start; /* 🔴 텍스트 좌측정렬 */
+  align-items: flex-start;
   justify-content: center;
   transform: rotateY(180deg);
   padding: 20px;
@@ -94,7 +94,6 @@ header .subheading2 {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
   padding: 1rem;
-  font-weight: 100;
 }
 .gallery img {
   object-fit: cover;
@@ -115,42 +114,11 @@ header .subheading2 {
   }
 }
 
-.year-group {
-  margin-bottom: 2rem; /* 그룹 간격 */
-}
-
-.year-heading {
-  font-size: 1rem;       /* 하위제목 크기 */
-  color: #729C70;        /* 부드러운 녹색 */
-  margin: 1rem 0 0.5rem; /* 위 여백, 아래 여백 */
-  padding-left: 0.4rem;  /* 살짝 들여쓰기 */
-}
-
-#image-popup {
-  width : 100vw;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
+#image-popup,
 #image-popup-overlay {
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
-}
-
-#image-popup.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-#image-popup-overlay.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-#popup-caption {
-  display: none;
 }
 
 #image-popup.show,
@@ -159,6 +127,24 @@ header .subheading2 {
   pointer-events: auto;
 }
 
+#image-popup {
+  position: fixed; 
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  z-index: 9999;
+  text-align: center;
+}
+
+#popup-img {
+  width: 100vw;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
 </style>
 </head>
 <body>
@@ -167,7 +153,6 @@ header .subheading2 {
   <h1>Sungsoo<br>&<br>Hanbi</h1>
   <p class="subheading1">💛 우리를 소개합니다</p>
 
-  <!-- 카드 플립 구조 -->
   <div style="display: flex; justify-content: flex-start; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
     <div class="flip-card"> 
       <div class="flip-card-inner"> 
@@ -204,129 +189,47 @@ header .subheading2 {
 </header>
 
 <main>
-    <!-- ⭐️ 2023년 -->
-  <section class="year-group">
-    <h2 class="year-heading">2025년</h2>
-     <div class="gallery">
-    <a href="images/1.jpg">
-      <img src="images/1.jpg">
-    </a>
-    <a href="images/2.jpg">
-      <img src="images/2.jpg">
-    </a>
-    <a href="images/3.jpg">
-      <img src="images/3.jpg">
-    </a>
-    <a href="images/4.jpg">
-      <img src="images/4.jpg">
-    </a>
-    <a href="images/5.jpg">
-      <img src="images/5.jpg">
-    </a>
-    <a href="images/6.jpg">
-      <img src="images/6.jpg">
-    </a>
+  <div class="gallery">
+    <a href="images/1.jpg"><img src="images/1.jpg"></a>
+    <a href="images/2.jpg"><img src="images/2.jpg"></a>
+    <a href="images/3.jpg"><img src="images/3.jpg"></a>
   </div>
-  </section>
 </main>
   
-<!-- D-Day 위젯 -->
-<div id="dday-widget" style="
-  position: fixed; 
-  top: 10px; 
-  right: 10px; 
-  background: rgba(114, 156, 112, 0.9); 
-  color: #fff; 
-  padding: 4px 8px;
-  border-radius: 8px; 
-  font-size: 0.75rem;
-  font-weight: 700;
-  font-family: 'Lato', sans-serif; 
-  z-index: 999;">
-  <span id="dday-count"></span>
-</div>
-
-<!-- 🔴 팝업 오버레이 -->
+<!-- 팝업 오버레이 -->
 <div id="image-popup-overlay" style="
   position: fixed; 
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: rgba(0, 0, 0, 0.3);
   z-index: 9998;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
 "></div>
 
-<!-- 🔴 팝업 이미지 -->
-<div id="image-popup" style="
-  position: fixed; 
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: transparent;
-  z-index: 9999;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-">
-  <img id="popup-img" src="" style="
-    width: 100vw; 
-    height: auto;
-    border-radius: 12px;
-    display: block;
-    margin: 0 auto;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  ">
+<!-- 팝업 이미지 -->
+<div id="image-popup">
+  <img id="popup-img" src="">
 </div>
 
 <script>
-  function updateDday() {
-    const targetDate = new Date('2026-02-08T00:00:00');
-    const today = new Date();
-    const diffTime = targetDate - today;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    const ddayCount = document.getElementById('dday-count');
-    if (diffDays > 0) {
-      ddayCount.textContent = `D-${diffDays}`;
-    } else if (diffDays === 0) {
-      ddayCount.textContent = 'D-Day';
-    } else {
-      ddayCount.textContent = `D+${Math.abs(diffDays)}`;
-    }
-  }
-  updateDday();
-  setInterval(updateDday, 1000 * 60 * 60);
-
-  // flip 카드 클릭 toggle
+  // flip 카드 토글
   document.querySelectorAll('.flip-card').forEach(card => { 
     card.addEventListener('click', () => { 
       card.classList.toggle('flipped'); 
     }); 
   });
 
-// 두번째 소제목 하위의 사진들만 팝업으로 띄우기
-  document.querySelectorAll('main .gallery a').forEach(link => {
+  // 이미지 클릭 시 팝업 띄우기
+  document.querySelectorAll('.gallery a').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
-
       const imgSrc = link.querySelector('img').src;
-      const popup = document.getElementById('image-popup');
-      const overlay = document.getElementById('image-popup-overlay');
-      const popupImg = document.getElementById('popup-img');
-
-      popupImg.src = imgSrc;
-
-      // ⭐️ show 클래스 추가로 자연스럽게 등장
-      popup.classList.add('show');
-      overlay.classList.add('show');
+      document.getElementById('popup-img').src = imgSrc;
+      document.getElementById('image-popup').classList.add('show');
+      document.getElementById('image-popup-overlay').classList.add('show');
     });
   });
 
-
-// 🔴 오버레이나 팝업 클릭 시 닫기
-  // 🔴 오버레이 클릭 시 팝업 닫기 (⭐️수정)
+  // 오버레이 클릭 시 팝업 닫기
   document.getElementById('image-popup-overlay').addEventListener('click', () => {
     document.getElementById('image-popup').classList.remove('show');
     document.getElementById('image-popup-overlay').classList.remove('show');

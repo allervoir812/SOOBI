@@ -115,7 +115,23 @@ header .subheading2 {
   }
 }
 #image-popup {
-  background: transparent; 
+  width: 100vw;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+#image-popup,
+#image-popup-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease; /* ⭐️ 부드럽게 전환 */
+  pointer-events: none; /* ⭐️ 기본은 클릭 불가 */
+}
+#image-popup.show,
+#image-popup-overlay.show {
+  opacity: 1;
+  pointer-events: auto; /* ⭐️ show 상태일 때만 클릭 가능 */
 }
 #popup-caption {
   display: none;
@@ -291,26 +307,30 @@ header .subheading2 {
   });
 
 // 두번째 소제목 하위의 사진들만 팝업으로 띄우기
-document.querySelectorAll('main .gallery a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const imgSrc = link.querySelector('img').src;
-    document.getElementById('popup-img').src = imgSrc;
-    document.getElementById('image-popup').style.display = 'block';
-    document.getElementById('image-popup-overlay').style.display = 'block';
+  document.querySelectorAll('main .gallery a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+
+      const imgSrc = link.querySelector('img').src;
+      const popup = document.getElementById('image-popup');
+      const overlay = document.getElementById('image-popup-overlay');
+      const popupImg = document.getElementById('popup-img');
+
+      popupImg.src = imgSrc;
+
+      // ⭐️ show 클래스 추가로 자연스럽게 등장
+      popup.classList.add('show');
+      overlay.classList.add('show');
+    });
   });
-});
+
 
 // 🔴 오버레이나 팝업 클릭 시 닫기
-document.getElementById('image-popup-overlay').addEventListener('click', () => {
-  document.getElementById('image-popup').style.display = 'none';
-  document.getElementById('image-popup-overlay').style.display = 'none';
-});
-document.getElementById('image-popup').addEventListener('click', () => {
-  document.getElementById('image-popup').style.display = 'none';
-  document.getElementById('image-popup-overlay').style.display = 'none';
-});
-
+  // 🔴 오버레이 클릭 시 팝업 닫기 (⭐️수정)
+  document.getElementById('image-popup-overlay').addEventListener('click', () => {
+    document.getElementById('image-popup').classList.remove('show');
+    document.getElementById('image-popup-overlay').classList.remove('show');
+  });
 </script>
 </body>
 </html>

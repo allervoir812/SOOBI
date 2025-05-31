@@ -213,18 +213,18 @@ header .subheading2 {
 
 <script>
   function updateDday() {
-    const targetDate = new Date('2025-02-08T00:00:00'); // 디데이
+    const targetDate = new Date('2026-02-08T00:00:00'); // 디데이
     const today = new Date();
     const diffTime = targetDate - today;
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     const ddayCount = document.getElementById('dday-count');
     if (diffDays > 0) {
-      ddayCount.textContent = `D-${diffDays}`;
+      ddayCount.textContent = `❤ D-${diffDays}`;
     } else if (diffDays === 0) {
       ddayCount.textContent = 'D-Day';
     } else {
-      ddayCount.textContent = `D+${Math.abs(diffDays)}`;
+      ddayCount.textContent = `❤ D+${Math.abs(diffDays)}`;
     }
   }
 

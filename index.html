@@ -30,7 +30,7 @@ header {
 header .subheading1,
 header .subheading2 {
   position: relative;
-  display: inline-block;
+  display: block;
   font-size: 1.0rem;
   font-weight: 500;
   margin: 0;
@@ -57,8 +57,7 @@ header .subheading2 {
   transition: transform 0.8s;
   transform-style: preserve-3d;
 }
-.flip-card:hover .flip-card-inner,
-.flip-card.flipped .flip-card-inner { 
+.flip-card.flipped .flip-card-inner { /* 🔴hover 대신 클릭으로 동작 */
   transform: rotateY(180deg);
 }
 .flip-card-front,
@@ -142,6 +141,7 @@ header .subheading2 {
 
 <header>
   <h1>Sungsoo<br>&<br>Hanbi</h1>
+  <p class="subheading1">💛 우리를 소개합니다</p> <!-- 🔴소제목1 다시 보이게 -->
     <!-- 🔴수정: 이미지 대신 카드 플립 구조 -->
   <div style="display: flex; justify-content: flex-start; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
     <div class="flip-card"> 
@@ -235,8 +235,5 @@ header .subheading2 {
     }); 
   }); 
 </script>
-
-</script>
-  
 </body>
 </html>

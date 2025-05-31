@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sungsoo & Hanbi</title>
@@ -29,6 +31,8 @@ header {
   padding: 2rem;
 }
 .gallery img {
+  object-fit: cover; /* 사진을 꽉 채우면서 정사각형으로 자르기 */
+  aspect-ratio: 1/1; /* 정사각형 비율! */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -54,14 +58,27 @@ header {
 
 <main>
   <div class="gallery">
-    <img src="images/A7401442.jpg" alt=" ">
-    <img src="images/A7400132.jpg" alt=" ">
-    <img src="images/A7402149.jpg" alt=" ">
-    <img src="images/DSC04145.jpg" alt=" ">
-    <img src="images/DSC04719.jpg" alt=" ">
-    <img src="images/DSC05806.jpg" alt=" ">
-    <img src="images/YEON0180.jpg" alt=" ">
-    <img src="images/YEON0401.jpg" alt=" ">
+    <a href="images/A7401442.jpg" data-lightbox="gallery">
+      <img src="images/A7401442.jpg" alt=" ">
+    </a>
+    <a href="images/A7400132.jpg" data-lightbox="gallery">
+      <img src="images/A7400132.jpg" alt=" ">
+    </a>
+    <a href="images/A7402149.jpg" data-lightbox="gallery">
+      <img src="images/A7402149.jpg" alt=" ">
+    </a>
+    <a href="images/DSC04719.jpg" data-lightbox="gallery">
+      <img src="images/DSC04719.jpg" alt=" ">
+    </a>
+    <a href="images/DSC05806.jpg" data-lightbox="gallery">
+      <img src="images/DSC05806.jpg" alt=" ">
+    </a>
+    <a href="images/YEON0180.jpg" data-lightbox="gallery">
+      <img src="images/YEON0180.jpg" alt=" ">
+    </a>
+    <a href="images/YEON0401.jpg" data-lightbox="gallery">
+      <img src="images/YEON0401.jpg" alt=" ">
+    </a>
   </div>
 </main>
 

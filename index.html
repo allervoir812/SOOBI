@@ -423,6 +423,71 @@ header { margin-top: 1.25rem; }
   font-family: 'Zen Kaku Gothic New', sans-serif;
 }
 
+/* 💒 예식정보 블록 */
+.wedding-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  background: #f9faf9;
+  border-radius: 12px;
+  padding: 1.8rem 1.2rem;
+  margin: 2.5rem auto 3rem;
+  max-width: 700px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* 미니 달력 */
+.calendar {
+  background: #8BBB89;
+  color: #fff;
+  border-radius: 12px;
+  text-align: center;
+  padding: 1.2rem 1rem;
+  width: 150px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.calendar .month {
+  font-size: 0.85rem;
+  font-weight: 400;
+  opacity: 0.9;
+  letter-spacing: 0.05em;
+}
+.calendar .day {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0.2rem 0;
+}
+.calendar .weekday {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* 예식 세부 정보 */
+.details {
+  text-align: left;
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.8;
+  font-weight: 400;
+}
+.details strong {
+  color: #2f6f4b;
+  font-weight: 600;
+}
+
+/* 모바일 대응 */
+@media (max-width: 600px) {
+  .wedding-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .details {
+    text-align: center;
+  }
+}
 
   
 </style>
@@ -493,6 +558,20 @@ header { margin-top: 1.25rem; }
     </div> 
   </div> 
 
+  <!-- 💒 예식정보 -->
+<div class="wedding-info">
+  <div class="calendar">
+    <div class="month">FEBRUARY 2026</div>
+    <div class="day">08</div>
+    <div class="weekday">SATURDAY</div>
+  </div>
+  <div class="details">
+    <p><strong>일시</strong> : 2026년 2월 8일 (토) 오후 1시 30분</p>
+    <p><strong>장소</strong> : 아펠가모 공덕 (마리에홀)</p>
+    <p><strong>주소</strong> : 서울 마포구 마포대로 92 효성해링턴스퀘어 B동 7층</p>
+  </div>
+</div>
+  
 <div class="intro-text">
   <div class="kor">우리의 소중한 순간들</div>
   <div class="eng">Our Precious Moments</div>
@@ -512,6 +591,8 @@ header { margin-top: 1.25rem; }
       <a href="images/6.jpg"><img src="images/6.jpg" alt=""></a>
     </div>
   </section>
+
+
 
   <!-- 💒 오시는 길 (카카오맵) -->
   <section id="location" class="location-section">

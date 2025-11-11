@@ -202,6 +202,9 @@ header .subheading2 {
     .root_daum_roughmap iframe {
       width: 100% !important;
     }  
+
+ /* 컨테이너 너비도 100% 강제 */
+#daumRoughmapContainer1762877507237 { width: 100% !important; } 
 </style>
 </head>
 
@@ -359,11 +362,11 @@ header .subheading2 {
 <script charset="UTF-8">
   try {
     new daum.roughmap.Lander({
-      "timestamp": "1762877507237",
-      "key": "czvqb7c6baj",
-      "mapWidth": "780",
-      "mapHeight": "360"
-    }).render();
+  "timestamp": "1762877507237",
+  "key": "czvqb7c6baj",
+  "mapWidth": "100%",  // ✅ 반응형
+  "mapHeight": "360"
+}).render();
   } catch (e) {
     console.error("[Kakao RoughMap] 렌더 에러:", e);
   }

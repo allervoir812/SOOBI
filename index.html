@@ -644,6 +644,46 @@ header { margin-top: 1.25rem; }
   color: #8B7A50 !important; /* 감성글귀 색 */
   font-weight: 700;          /* 숫자 선명하게 */
 }
+/* 👇 인트로 영역의 단일 플립카드 전용 스타일 */
+.intro-flip {
+  width: 100%;
+  max-width: 360px;        /* 가로 살짝만 줄임 (기존 400px → 360px) */
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;     /* 컨테이너도 둥글게 */
+  overflow: hidden;        /* 둥근 모서리 안으로 내용 잘림 */
+}
+
+/* 앞/뒤 면과 이미지도 같은 라운드로 통일 */
+.intro-flip .flip-card-inner,
+.intro-flip .flip-card-front,
+.intro-flip .flip-card-back {
+  border-radius: inherit;  /* 컨테이너 둥근값 그대로 상속 */
+  overflow: hidden;
+}
+
+/* 이미지는 라운드 안쪽에 꽉 차도록 */
+.intro-flip .flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* contain → cover 로 바꿔 깔끔하게 채움 */
+  display: block;
+}
+
+/* 뒷면도 동일한 라운드/사이즈 유지 */
+.intro-flip .flip-card-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* 모바일에서 살짝 더 유연하게 */
+@media (max-width: 480px) {
+  .intro-flip {
+    max-width: 90vw;       /* 화면에 따라 자연스럽게 줄어듦 */
+    border-radius: 14px;
+  }
+}
 
 </style>
 </head>
@@ -673,22 +713,18 @@ header { margin-top: 1.25rem; }
 <!-- 💚 결혼합니다 + 감성글귀 섹션 -->
 <section class="intro-message">
   <h2 class="main-announcement">저희, 결혼합니다!</h2>
-<!-- 💛 플립 카드 (사진 비율 유지) -->
-<div class="flip-card" style="width: 100%; max-width: 400px; margin: 2rem auto; aspect-ratio: 4 / 3;">
+  
+  <!-- 💛 플립 카드 (사진 비율 유지) -->
+<div class="flip-card intro-flip">
   <div class="flip-card-inner">
     <!-- 앞면 -->
     <div class="flip-card-front">
-      <img src="images/34.jpg" alt="우리의 사진" style="width: 100%; height: 100%; object-fit: contain; background: #fff;">
+      <img src="images/34.jpg" alt="우리의 사진">
     </div>
-
     <!-- 뒷면 -->
     <div class="flip-card-back" style="
       background-color: #8BBB89;
       color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
       font-weight: 500;
       padding: 1.2rem;
       line-height: 1.6;">
@@ -696,6 +732,7 @@ header { margin-top: 1.25rem; }
     </div>
   </div>
 </div>
+
   <div class="intro-lines">
     <p>닮은 모습에서 사랑을 시작했고,</p>
     <p>다른 모습 속에서 서로여야만하는 이유를 찾았습니다.</p>

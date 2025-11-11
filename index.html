@@ -620,6 +620,23 @@ header { margin-top: 1.25rem; }
     line-height: 1.8;
   }
 }
+/* 💛 달력 하이라이트(결혼식 날짜 표시) 수정 */
+.calendar .highlight-day {
+  position: relative;
+  color: #8B7A50; /* 글자색은 기존 따뜻한 브라운 계열 유지 */
+  font-weight: 700;
+}
+
+.calendar .highlight-day::after {
+  content: "💛";                       /* ✅ 하트로 변경 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%) scale(1.2);
+  opacity: 0.35;                       /* ✅ 살짝 투명하게 */
+  font-size: 1.3em;                    /* ✅ 하트 크기 */
+  pointer-events: none;                /* 클릭 영향 X */
+}
 
 </style>
 </head>

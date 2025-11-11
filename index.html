@@ -172,11 +172,12 @@ header .subheading2 {
   font-size: 1rem;
   color: #729C70;
   display: inline-block;
+  text-align: center;          /* ✅ 가운데 정렬 */
+  background: none;            /* ✅ 하이라이트 제거 */
   padding: 0.1rem 0.4rem;
-  background: rgba(255, 255, 0, 0.3);
   border-radius: 2.5px;
   line-height: 1;
-  margin: 0 0 .75rem 0;
+  margin: 2.5rem 0 1rem 0;     /* ✅ 위쪽 여백 늘림 (2.5rem으로) */
 }
 .map-wrap {
   width: 100%;
@@ -185,6 +186,7 @@ header .subheading2 {
   border-radius: 12px;
   overflow: hidden;
 }
+.location-section { margin-top: 4rem; }  /* 상단 간격 더 확보 */
 .location-info {
   margin-top: .75rem;
   font-size: .85rem;

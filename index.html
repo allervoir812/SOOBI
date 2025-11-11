@@ -537,6 +537,39 @@ header { margin-top: 1.25rem; }
 .wedding-plain .intro-text {
   margin-top: 6rem !important;   /* ⬅️ 위쪽 여백 충분히 확보 */
 }
+/* ===== Countdown (달력 하단 스톱워치 스타일) ===== */
+.countdown{
+  max-width:820px; margin:2.2rem auto 0; text-align:center; padding:0 1rem;
+}
+.count-row{
+  display:flex; justify-content:center; align-items:flex-end; gap:2.4rem;
+  font-family:'Lato', sans-serif;
+}
+.count-block label{
+  display:block; font-size:0.9rem; letter-spacing:0.32em; /* 넓은 자간 */
+  color:#c6932b; /* 제목들과 맞춘 골드 */
+}
+.count-block .value{
+  margin-top:0.35rem; font-size:1.9rem; font-weight:700; color:#c6932b;
+  line-height:1;
+}
+.count-sep{ /* 왼쪽 여백용(디자인 균형) */
+  width:0.6rem; height:1px; display:inline-block;
+}
+.colon{
+  font-size:1.4rem; color:#c6932b; align-self:center; margin:0 -0.2rem;
+}
+
+/* 캡션(남은 일수 문장) */
+.count-caption{ margin-top:0.9rem; font-size:0.98rem; color:#444; }
+
+/* 작은 화면 보정 */
+@media (max-width:600px){
+  .count-row{ gap:1.8rem; }
+  .count-block .value{ font-size:1.7rem; }
+  .count-block label{ font-size:0.85rem; letter-spacing:0.28em; }
+  .colon{ font-size:1.2rem; }
+}
   
 </style>
 </head>
@@ -629,6 +662,42 @@ header { margin-top: 1.25rem; }
       <tr><td class="sun">22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td class="sat">28</td></tr>
     </tbody>
   </table>
+<!-- ⏱️ Countdown -->
+<div class="countdown" id="wedding-countdown" aria-label="예식까지 남은 시간">
+  <div class="count-row">
+    <div class="count-block">
+      <label>DAYS</label>
+      <div class="value" data-unit="days">00</div>
+    </div>
+
+    <span class="count-sep"> </span>
+
+    <div class="count-block">
+      <label>HOUR</label>
+      <div class="value" data-unit="hours">00</div>
+    </div>
+
+    <span class="colon">:</span>
+
+    <div class="count-block">
+      <label>MIN</label>
+      <div class="value" data-unit="mins">00</div>
+    </div>
+
+    <span class="colon">:</span>
+
+    <div class="count-block">
+      <label>SEC</label>
+      <div class="value" data-unit="secs">00</div>
+    </div>
+  </div>
+
+  <p class="count-caption" data-caption>00일 남았습니다</p>
+</div>
+
+
+
+  
 </section>
   
 <div class="intro-text">
@@ -803,6 +872,43 @@ header { margin-top: 1.25rem; }
     });
   }, { root:null, rootMargin:'0px 0px -10% 0px', threshold:0.1 });
   items.forEach(el=>io.observe(el));
+})();
+</script>
+<script>
+(function countdown(){
+  // ✅ 예식 시간 (연, 월-1, 일, 시, 분) — 네가 쓰던 시간으로 고정
+  const target = new Date(2026, 1, 8, 13, 30, 0); // 2026-02-08 13:30
+
+  const el = document.getElementById('wedding-countdown');
+  if (!el) return;
+  const $ = sel => el.querySelector(sel);
+  const set = (unit, v) => el.querySelector(`.value[data-unit="${unit}"]`).textContent = v;
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function tick(){
+    const now = new Date();
+    let diff = target - now;
+    if (diff <= 0){
+      set('days','00'); set('hours','00'); set('mins','00'); set('secs','00');
+      $('[data-caption]').textContent = '오늘입니다';
+      return;
+    }
+    const sec = Math.floor(diff/1000);
+    const days = Math.floor(sec / 86400);
+    const hours = Math.floor((sec % 86400) / 3600);
+    const mins = Math.floor((sec % 3600) / 60);
+    const secs = sec % 60;
+
+    set('days', days);
+    set('hours', pad(hours));
+    set('mins', pad(mins));
+    set('secs', pad(secs));
+
+    $('[data-caption]').textContent = `${days}일 남았습니다`;
+  }
+  tick();
+  setInterval(tick, 1000);
 })();
 </script>
 

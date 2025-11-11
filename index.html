@@ -423,48 +423,65 @@ header { margin-top: 1.25rem; }
   font-family: 'Zen Kaku Gothic New', sans-serif;
 }
 
-/* 💒 예식정보 블록 */
+/* 💒 예식정보 섹션 */
 .wedding-info {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 2rem;
   background: #f9faf9;
   border-radius: 12px;
-  padding: 1.8rem 1.2rem;
-  margin: 2.5rem auto 3rem;
-  max-width: 700px;
+  padding: 2rem 1.5rem;
+  margin: 3rem auto 3rem;
+  max-width: 750px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* 미니 달력 */
-.calendar {
-  background: #8BBB89;
-  color: #fff;
-  border-radius: 12px;
+/* 📅 달력 박스 */
+.calendar-box {
+  background: #fff;
+  border: 1.5px solid #8BBB89;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 240px;
   text-align: center;
-  padding: 1.2rem 1rem;
-  width: 150px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.calendar .month {
-  font-size: 0.85rem;
-  font-weight: 400;
-  opacity: 0.9;
-  letter-spacing: 0.05em;
-}
-.calendar .day {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin: 0.2rem 0;
-}
-.calendar .weekday {
-  font-size: 0.85rem;
-  opacity: 0.9;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
 }
 
-/* 예식 세부 정보 */
+/* 달력 헤더 */
+.cal-header {
+  background: #8BBB89;
+  color: #fff;
+  padding: 0.6rem 0;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+}
+
+/* 달력 테이블 */
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.calendar-table th {
+  color: #729C70;
+  font-weight: 600;
+  padding: 0.3rem 0;
+}
+.calendar-table td {
+  padding: 0.4rem 0;
+  color: #333;
+}
+.calendar-table td.highlight {
+  background: #8BBB89;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 50%;
+}
+
+/* 💍 예식 세부정보 */
 .details {
   text-align: left;
   font-size: 0.9rem;
@@ -482,14 +499,13 @@ header { margin-top: 1.25rem; }
   .wedding-info {
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.2rem;
   }
   .details {
     text-align: center;
   }
 }
 
-  
 </style>
 </head>
 
@@ -516,7 +532,7 @@ header { margin-top: 1.25rem; }
 
 
   <!-- 💌 감성글귀,,, -->
-<p class="intro-quote">저희,<br>결혼합니다!</p>
+<p class="intro-quote">저희,<br>결혼합니다람쥐!</p>
 <header style="margin-top: 60px;">
 <div class="header-names">
   <div class="intro-text">
@@ -558,19 +574,35 @@ header { margin-top: 1.25rem; }
     </div> 
   </div> 
 
-  <!-- 💒 예식정보 -->
+<!-- 💒 예식 정보 (진짜 달력 버전) -->
 <div class="wedding-info">
-  <div class="calendar">
-    <div class="month">FEBRUARY 2026</div>
-    <div class="day">08</div>
-    <div class="weekday">SATURDAY</div>
+  <div class="calendar-box">
+    <div class="cal-header">
+      <span class="month">FEBRUARY 2026</span>
+    </div>
+    <table class="calendar-table">
+      <thead>
+        <tr>
+          <th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td>1</td></tr>
+        <tr><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td class="highlight">8</td></tr>
+        <tr><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+        <tr><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td></tr>
+        <tr><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td></td></tr>
+      </tbody>
+    </table>
   </div>
+
   <div class="details">
     <p><strong>일시</strong> : 2026년 2월 8일 (토) 오후 1시 30분</p>
     <p><strong>장소</strong> : 아펠가모 공덕 (마리에홀)</p>
     <p><strong>주소</strong> : 서울 마포구 마포대로 92 효성해링턴스퀘어 B동 7층</p>
   </div>
 </div>
+
   
 <div class="intro-text">
   <div class="kor">우리의 소중한 순간들</div>

@@ -472,22 +472,24 @@ header { margin-top: 1.25rem; }
   font-size: 1.05rem;          /* 크게, 시원하게 */
   table-layout: fixed;         /* 셀 균등 */
 }
+/* 달력 요일 머리글(무채색) */
 .wedding-plain .cal th {
+  color: #777;
   font-weight: 600;
-  color: #c6932b;              /* 기본 요일 색(골드) */
   padding-bottom: 0.2rem;
   letter-spacing: 0.05em;
 }
+
+/* 기본 날짜: 진한 회색 */
 .wedding-plain .cal td {
-  padding: 0.25rem 0;
-  color: #c6932b;              /* 기본 날짜 색(골드) */
+  color: #555;
 }
 
-/* 일/토 색상 */
-.wedding-plain .sun { color: #d38aa3; }  /* 일요일 핑크 */
-.wedding-plain .sat { color: #4b6fcc; }  /* 토요일 파랑 */
+/* 일요일/토요일 색상 (톤 다운) */
+.wedding-plain .sun { color: #b36a6a; }   /* toned red */
+.wedding-plain .sat { color: #5a7bbf; }   /* toned blue */
 
-/* 하이라이트(예식일) */
+/* 예식일 하이라이트 원 색상: 초록 */
 .wedding-plain .d8 {
   position: relative;
   font-weight: 700;
@@ -499,10 +501,11 @@ header { margin-top: 1.25rem; }
   left: 50%; top: 50%;
   transform: translate(-50%, -50%);
   width: 2.2em; height: 2.2em;
-  background: #c6932b;         /* 골드 원 */
+  background: #8BBB89;      /* ✅ 초록 하이라이트 */
   border-radius: 50%;
   z-index: -1;
 }
+
 
 /* 모바일 폰트 보정 */
 @media (max-width: 600px) {
@@ -581,12 +584,13 @@ header { margin-top: 1.25rem; }
 
 <!-- 💒 예식 안내 (텍스트형 달력) -->
 <section class="wedding-plain">
-  <div class="title-en">WEDDING INFORMATION</div>
-  <div class="title-ko">예식 안내</div>
+  <div class="intro-text">
+    <div class="kor">예식 안내</div>
+    <div class="eng">Wedding Information</div>
+  </div>
 
   <div class="venue">아펠가모 공덕 · 마리에홀</div>
   <div class="datetime">2026. 02. 08 (일) 오후 1시 30분</div>
-
   <!-- 2026년 2월 달력 (일 ~ 토) : 실제 배치에 맞춘 그리드 -->
   <table class="cal" aria-label="2026년 2월 달력">
     <thead>

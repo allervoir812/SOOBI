@@ -339,14 +339,15 @@ header .subheading2 {
   object-fit: cover;                    /* 사진 꽉 채우되 비율 유지 */
   display: block;
 }
-.hero::after {                          /* 아래쪽 그라데이션로 글자 가독성 업 */
+.hero::after {
   content: "";
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  height: 30%;
-  background: linear-gradient(transparent, rgba(0,0,0,0.35));
+  height: 35%; /* ✅ 자연스러운 하이라이트 영역 */
+  background: linear-gradient(transparent, rgba(255,255,255,0.85)); /* ✅ 밝게 페이드아웃 */
   pointer-events: none;
 }
+
 
 /* 좌/우 이름 오버레이 — 상단으로 올리고, 검정 글씨로 */
 /* ===== HERO 이름 스타일 (사진 밑으로 내리고 초록/회색 글씨) ===== */

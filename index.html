@@ -255,9 +255,8 @@ header .subheading2 {
     <h2 class="location-title">오시는 길</h2>
     <div class="location-card">
       <div class="map-wrap">
-        <!-- ✅ 컨테이너 id는 daumRoughmapContainer{timestamp} 형태여야 함 -->
-        <!-- ▼▼▼ timestamp와 key는 꼭 네 값으로 교체! ▼▼▼ -->
-        <div id="daumRoughmapContainer1652464367301" class="root_daum_roughmap root_daum_roughmap_landing" style="width:100%; height:360px;"></div>
+        <!-- ✅ 컨테이너 id와 timestamp가 반드시 동일해야 함 -->
+        <div id="daumRoughmapContainer1762877507237" class="root_daum_roughmap root_daum_roughmap_landing" style="width:100%; height:360px;"></div>
       </div>
       <div class="location-info">
         <p><strong>장소</strong> : 서울 모처 ○○웨딩홀 (예시)</p>
@@ -342,13 +341,8 @@ header .subheading2 {
   document.getElementById('image-popup-overlay').addEventListener('click', closePopup);
   document.getElementById('popup-img').addEventListener('click', closePopup);
 
-  /* ===== 카카오맵 로더 + 렌더 =====
-     1) https://map.kakao.com 에서 장소 검색
-     2) 'HTML 태그 복사' → '소스 생성하기'로 받은 timestamp/key를 아래에 반영
-     3) 컨테이너 id의 숫자 부분과 Lander의 "timestamp"가 반드시 동일해야 함
-  */
+  // ✅ 카카오맵 렌더
   (function loadKakaoRoughMap() {
-    // 이미 로더가 있으면 중복 로드 방지
     if (!document.querySelector('script[src*="roughmapLoader.js"]')) {
       const loader = document.createElement('script');
       loader.charset = 'UTF-8';
@@ -360,8 +354,8 @@ header .subheading2 {
     }
 
     function initMap() {
-      const TIMESTAMP = '1762877507237'; 
-      const KEY = 'czvqb7c6baj';               
+      const TIMESTAMP = '1762877507237';
+      const KEY = 'czvqb7c6baj';
 
       new daum.roughmap.Lander({
         "timestamp": TIMESTAMP,

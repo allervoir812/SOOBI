@@ -115,21 +115,16 @@ header .subheading2 {
   display: inline-block;
   font-size: 1rem;
   color: #729C70;
-  margin: 0.5rem 0 0.25rem; /* 위, 아래 간격 */
-  padding: 0.1rem 0.4rem; /* 형광펜 배경의 좌우 여백 (글씨보다 살짝 크게) */
+  margin: 0.5rem 0 0.25rem;
+  padding: 0.1rem 0.4rem;
   background: rgba(255, 255, 0, 0.3);
   border-radius: 2.5px;
   line-height: 1;
-  margin-left: 1.7rem; /* 왼쪽 여백 고정 */
+  margin-left: 1.7rem;
 }
 @media (max-width: 768px) {
-  header {
-    font-size: 1.5rem;
-  }
-    .flip-card {
-    width: 90vw;   /* 모바일 화면에서 90vw */
-    height: 90vw;  /* 높이도 맞춰서 정사각형으로 */
-  }
+  header { font-size: 1.5rem; }
+  .flip-card { width: 90vw; height: 90vw; }
 }
 
 #image-popup,
@@ -138,13 +133,11 @@ header .subheading2 {
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
-
 #image-popup.show,
 #image-popup-overlay.show {
   opacity: 1;
   pointer-events: auto;
 }
-
 #image-popup {
   position: fixed; 
   top: 50%; 
@@ -154,7 +147,6 @@ header .subheading2 {
   z-index: 9999;
   text-align: center;
 }
-
 #popup-img {
   width: 90vw;
   height: auto;
@@ -163,6 +155,43 @@ header .subheading2 {
   margin: 0 auto;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
+
+/* ===== 오시는 길(카카오맵) 스타일 ===== */
+.location-section {
+  max-width: 820px;
+  margin: 2rem auto 3rem;
+  padding: 0 1rem;
+}
+.location-card {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+.location-title {
+  font-size: 1rem;
+  color: #729C70;
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  background: rgba(255, 255, 0, 0.3);
+  border-radius: 2.5px;
+  line-height: 1;
+  margin: 0 0 .75rem 0;
+}
+.map-wrap {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.location-info {
+  margin-top: .75rem;
+  font-size: .85rem;
+  color: #444;
+  line-height: 1.6;
+}
+.location-info strong { color: #2f6f4b; }
 </style>
 </head>
 <body>
@@ -208,29 +237,35 @@ header .subheading2 {
 </header>
 
 <main>
-    <!-- ⭐️ 2025년 그룹 -->
+  <!-- ⭐️ 2025년 그룹 -->
   <section class="year-group">
-  <h2 class="year-heading">2025년</h2>
-   <div class="gallery">
-    <a href="images/1.jpg">
-      <img src="images/1.jpg">
-    </a>
-    <a href="images/2.jpg">
-      <img src="images/2.jpg">
-    </a>
-    <a href="images/3.jpg">
-      <img src="images/3.jpg">
-    </a>
-    <a href="images/4.jpg">
-      <img src="images/4.jpg">
-    </a>
-    <a href="images/5.jpg">
-      <img src="images/5.jpg">
-    </a>
-    <a href="images/6.jpg">
-      <img src="images/6.jpg">
-    </a>
-  </div>
+    <h2 class="year-heading">2025년</h2>
+    <div class="gallery">
+      <a href="images/1.jpg"><img src="images/1.jpg" alt=""></a>
+      <a href="images/2.jpg"><img src="images/2.jpg" alt=""></a>
+      <a href="images/3.jpg"><img src="images/3.jpg" alt=""></a>
+      <a href="images/4.jpg"><img src="images/4.jpg" alt=""></a>
+      <a href="images/5.jpg"><img src="images/5.jpg" alt=""></a>
+      <a href="images/6.jpg"><img src="images/6.jpg" alt=""></a>
+    </div>
+  </section>
+
+  <!-- 💒 오시는 길 (카카오맵) -->
+  <section id="location" class="location-section">
+    <h2 class="location-title">오시는 길</h2>
+    <div class="location-card">
+      <div class="map-wrap">
+        <!-- ✅ 컨테이너 id는 daumRoughmapContainer{timestamp} 형태여야 함 -->
+        <!-- ▼▼▼ timestamp와 key는 꼭 네 값으로 교체! ▼▼▼ -->
+        <div id="daumRoughmapContainer1652464367301" class="root_daum_roughmap root_daum_roughmap_landing" style="width:100%; height:360px;"></div>
+      </div>
+      <div class="location-info">
+        <p><strong>장소</strong> : 서울 모처 ○○웨딩홀 (예시)</p>
+        <p><strong>주소</strong> : 서울시 ○○구 ○○로 00 (예시) · 주차 가능</p>
+        <p><strong>대중교통</strong> : ○○역 ○번 출구 도보 5분 (예시)</p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- D-Day 위젯 -->
@@ -260,7 +295,7 @@ header .subheading2 {
 
 <!-- 팝업 이미지 -->
 <div id="image-popup">
-  <img id="popup-img" src="">
+  <img id="popup-img" src="" alt="">
 </div>
 
 <script>
@@ -299,7 +334,6 @@ header .subheading2 {
     });
   });
 
-
   // 오버레이나 이미지 클릭 시 팝업 닫기
   const closePopup = () => {
     document.getElementById('image-popup').classList.remove('show');
@@ -307,6 +341,38 @@ header .subheading2 {
   };
   document.getElementById('image-popup-overlay').addEventListener('click', closePopup);
   document.getElementById('popup-img').addEventListener('click', closePopup);
+
+  /* ===== 카카오맵 로더 + 렌더 =====
+     1) https://map.kakao.com 에서 장소 검색
+     2) 'HTML 태그 복사' → '소스 생성하기'로 받은 timestamp/key를 아래에 반영
+     3) 컨테이너 id의 숫자 부분과 Lander의 "timestamp"가 반드시 동일해야 함
+  */
+  (function loadKakaoRoughMap() {
+    // 이미 로더가 있으면 중복 로드 방지
+    if (!document.querySelector('script[src*="roughmapLoader.js"]')) {
+      const loader = document.createElement('script');
+      loader.charset = 'UTF-8';
+      loader.src = 'https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js';
+      loader.onload = initMap;
+      document.body.appendChild(loader);
+    } else {
+      initMap();
+    }
+
+    function initMap() {
+      /* ▼▼▼ 여기 두 값을 네 실제 값으로 교체 ▼▼▼ */
+      const TIMESTAMP = '1652464367301'; // 예시값
+      const KEY = '2a8fe';               // 예시값
+
+      // 컨테이너 id는 daumRoughmapContainer{TIMESTAMP} 이어야 함
+      new daum.roughmap.Lander({
+        "timestamp": TIMESTAMP,
+        "key": KEY,
+        "mapWidth": "780",
+        "mapHeight": "360"
+      }).render();
+    }
+  })();
 </script>
 </body>
 </html>

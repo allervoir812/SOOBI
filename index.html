@@ -398,13 +398,17 @@ header .subheading2 {
 header { margin-top: 1.25rem; }
 
   /* 지도 위 간략 주소 스타일 */
+/* 오시는 길 제목 밑 주소 */
 .map-address {
   text-align: center;
   font-size: 0.9rem;
-  color: #555;              /* 진한 회색 */
-  font-weight: 500;
-  margin: 0.4rem 0 1.2rem;  /* 위아래 간격 */
-  font-family: 'Lato', sans-serif;
+  color: #555;                 /* 진한 회색 */
+  font-weight: 400;
+  margin: 1.2rem 0 2.2rem;     /* ✅ 위쪽 간격 늘림 */
+  line-height: 1.5;            /* ✅ 줄 간격 약간 좁혀 붙임 */
+}
+.map-address br {
+  line-height: 1.1;            /* ✅ 예식장명-주소 간격 더 붙이기 */
 }
 
   

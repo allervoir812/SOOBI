@@ -463,33 +463,50 @@ header { margin-top: 1.25rem; }
   margin-top: 0.5rem;
 }
 
-/* 달력 표 */
+/* ===== 예식 안내(텍스트 달력) 튜닝 ===== */
+
+/* 전체 컨테이너 좌우 여유 */
+.wedding-plain { padding: 0 1.5rem; }
+
+/* 제목과 장소 간 간격 늘리기 */
+.wedding-plain .venue {
+  margin-top: 1.2rem;           /* ⬅️ 제목과 더 띄움 */
+  font-size: 1.05rem;
+  color: #c6932b;
+  font-weight: 600;
+}
+
+/* 달력: 좌우/위아래 간격 넓히기 + 크게 보이게 */
 .wedding-plain .cal {
   width: 100%;
+  table-layout: fixed;
   border-collapse: separate;
-  border-spacing: 0 0.6rem;    /* 행 간격으로 여백 주기 */
-  margin-top: 1.8rem;
-  font-size: 1.05rem;          /* 크게, 시원하게 */
-  table-layout: fixed;         /* 셀 균등 */
+  border-spacing: 1.1rem 0.9rem; /* ⬅️ (가로 간격, 세로 간격) 둘 다 넓힘 */
+  margin-top: 2rem;              /* 제목/장소 아래와도 간격 */
+  font-size: 1.15rem;            /* 숫자 크게 */
 }
-/* 달력 요일 머리글(무채색) */
+
+/* 요일 머리글은 무채색 */
 .wedding-plain .cal th {
   color: #777;
   font-weight: 600;
-  padding-bottom: 0.2rem;
+  padding-bottom: 0.25rem;
   letter-spacing: 0.05em;
 }
 
-/* 기본 날짜: 진한 회색 */
-.wedding-plain .cal td {
+/* 기본 날짜 색: 진한 회색 */
+.wedding-plain .cal td { 
   color: #555;
+  padding: 0.35rem 0;            /* 위아래 여백도 살짝 추가 */
 }
 
-/* 일요일/토요일 색상 (톤 다운) */
-.wedding-plain .sun { color: #b36a6a; }   /* toned red */
-.wedding-plain .sat { color: #5a7bbf; }   /* toned blue */
+/* 일/토 색 정확히 적용(특이성 올림) */
+.wedding-plain .cal td.sun { color: #b36a6a !important; }  /* toned red */
+.wedding-plain .cal td.sat { color: #5a7bbf !important; }  /* toned blue */
+.wedding-plain .cal th.sun { color: #b36a6a; }
+.wedding-plain .cal th.sat { color: #5a7bbf; }
 
-/* 예식일 하이라이트 원 색상: 초록 */
+/* 예식일 하이라이트(8일) 유지 */
 .wedding-plain .d8 {
   position: relative;
   font-weight: 700;
@@ -501,11 +518,10 @@ header { margin-top: 1.25rem; }
   left: 50%; top: 50%;
   transform: translate(-50%, -50%);
   width: 2.2em; height: 2.2em;
-  background: #8BBB89;      /* ✅ 초록 하이라이트 */
+  background: #8BBB89;
   border-radius: 50%;
   z-index: -1;
 }
-
 
 /* 모바일 폰트 보정 */
 @media (max-width: 600px) {
@@ -590,7 +606,7 @@ header { margin-top: 1.25rem; }
   </div>
 
   <div class="venue">아펠가모 공덕 · 마리에홀</div>
-  <div class="datetime">2026. 02. 08 (일) 오후 1시 30분</div>
+  <div class="datetime">2026. 02. 08 (일) 오전 11시 30분</div>
   <!-- 2026년 2월 달력 (일 ~ 토) : 실제 배치에 맞춘 그리드 -->
   <table class="cal" aria-label="2026년 2월 달력">
     <thead>

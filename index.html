@@ -574,6 +574,50 @@ header { margin-top: 1.25rem; }
 .year-group {
   margin-top: 0.2rem !important;  /* ✅ 기존보다 훨씬 붙임 */
 }  
+/* 💚 결혼합니다 + 감성글귀 섹션 */
+.intro-message {
+  text-align: center;
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+}
+
+.main-announcement {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #729C70; /* ✅ 초록빛 포인트 */
+  letter-spacing: 0.05em;
+  margin-bottom: 1.8rem;
+}
+
+.intro-photo img {
+  width: 90%;
+  max-width: 480px;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto 2rem;
+  object-fit: cover;
+}
+
+.intro-lines {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: #8B7A50; /* ✅ 따뜻한 브라운-그린 톤 */
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.intro-lines p {
+  margin: 0.25rem 0; /* ✅ 줄 간격 균일하게 */
+}
+
+/* 모바일에서도 간격 자연스럽게 */
+@media (max-width: 600px) {
+  .intro-lines {
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+}
+
 </style>
 </head>
 
@@ -599,15 +643,25 @@ header { margin-top: 1.25rem; }
 </section>
 
 
-  <!-- 💌 감성글귀,,, -->
-<p class="intro-quote">저희,<br>결혼합니다람쥐!</p>
-<header style="margin-top: 60px;">
-<div class="header-names">
-  <div class="intro-text">
-    <div class="kor">소개합니다</div>
-    <div class="eng">Clik the picture</div>
+<!-- 💚 결혼합니다 + 감성글귀 섹션 -->
+<section class="intro-message">
+  <h2 class="main-announcement">저희, 결혼합니다!</h2>
+  <div class="intro-photo">
+    <img src="images/34.jpg" alt="결혼사진" />
   </div>
-</div>
+  <div class="intro-lines">
+    <p>닮은 모습에서 사랑을 시작했고,</p>
+    <p>다른 모습 속에서 서로여야만하는 이유를 찾았습니다.</p>
+    <br>
+    <p>이제는 같은 길을 걸으며</p>
+    <p>평생을 함께하려 합니다.</p>
+    <br>
+    <p>저희에게 영원히 기억될 그 날</p>
+    <p>함께해주실 소중한 시간을</p>
+    <p>더 없는 기쁨으로 간직하겠습니다.</p>
+  </div>
+</section>
+
 
   <!-- 카드 플립 구조 -->
   <div style="display: flex; justify-content: flex-start; flex-wrap: wrap; gap: 10px; margin-top: 10px;">

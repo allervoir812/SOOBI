@@ -319,36 +319,46 @@ header .subheading2 {
   pointer-events: none;
 }
 
-/* 좌/우 이름 오버레이 */
+/* 좌/우 이름 오버레이 — 상단으로 올리고, 검정 글씨로 */
 .hero-names {
   position: absolute;
-  left: 0; right: 0; bottom: calc(12px + env(safe-area-inset-bottom));
+  left: 0; 
+  right: 0; 
+  top: 60px;  /* ✅ 사진 위쪽에서부터 60px 아래에 위치 (D-day보다 약간 아래) */
   display: flex;
-  justify-content: space-between;       /* 좌/우로 벌리기 */
-  align-items: flex-end;
+  justify-content: space-between;       
+  align-items: flex-start;
   padding: 0 1rem;
+  z-index: 5; /* ✅ 이미지 위에 글씨가 보이도록 */
 }
+
 .hero-name {
-  color: rgba(255,255,255,0.95);
-  text-shadow: 0 1px 2px rgba(0,0,0,.35);
-  line-height: 1.1;
+  color: #222;  /* ✅ 검정색으로 변경 */
+  text-shadow: none; /* ✅ 그림자 제거 */
+  line-height: 1.2;
 }
-.hero-name .kor {                        /* 한글 이름 (큰 글씨) */
-  font-size: 1.05rem;
+
+.hero-name .kor {
+  font-size: 1.1rem;
   font-weight: 700;
 }
-.hero-name .eng {                        /* 영문 이름 (작게) */
-  font-size: .72rem;
-  opacity: .95;
+
+.hero-name .eng {
+  font-size: 0.75rem;
+  opacity: 0.85;
   font-family: 'Lato', sans-serif;
 }
 
-/* 작은 화면 튜닝 */
+/* 작은 화면 (모바일) 튜닝 */
 @media (max-width: 600px) {
-  .hero-names { padding: 0 .8rem; }
+  .hero-names { 
+    top: 50px;    /* 조금 더 위로 붙이기 */
+    padding: 0 0.8rem; 
+  }
   .hero-name .kor { font-size: 1rem; }
-  .hero-name .eng { font-size: .68rem; }
+  .hero-name .eng { font-size: 0.7rem; }
 }
+
 
 /* 기존 header가 너무 아래로 밀리지 않도록 상단 마진 조정 */
 header { margin-top: 1.25rem; }

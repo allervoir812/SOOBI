@@ -265,7 +265,7 @@ header .subheading2 {
 .intro-text {
   width: 100%;
   text-align: center;
-  margin: 2rem 0 1rem;
+  margin: 2.5rem 0 1rem;
   line-height: 1.3;
 }
 
@@ -374,9 +374,9 @@ header .subheading2 {
   font-family: 'Lato', sans-serif;
 }
 
-  .hero-names .hero-name:first-child .kor { color: #729C70; } /* 왼쪽(원성수) */
+.hero-names .hero-name:first-child .kor { color: #729C70; } /* 왼쪽(원성수) */
 .hero-names .hero-name:last-child  .kor { color: #729C70; } /* 오른쪽(오한비) */
-.hero-names .hero-name .eng { color: #666; }                /* 영문 공통 회색 */
+.hero-names .hero-name .eng { color: #555; }                /* 영문 공통 회색 */
 
 /* 작은 화면 (모바일) 튜닝 */
 @media (max-width: 600px) {
@@ -390,8 +390,18 @@ header .subheading2 {
 
 
 
-/* 기존 header가 너무 아래로 밀리지 않도록 상단 마진 조정 */
+  /* 기존 header가 너무 아래로 밀리지 않도록 상단 마진 조정 */
 header { margin-top: 1.25rem; }
+
+  /* 지도 위 간략 주소 스타일 */
+.map-address {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;              /* 진한 회색 */
+  font-weight: 500;
+  margin: 0.4rem 0 1.2rem;  /* 위아래 간격 */
+  font-family: 'Lato', sans-serif;
+}
 
   
 </style>
@@ -459,7 +469,10 @@ header { margin-top: 1.25rem; }
     </div> 
   </div> 
 
-  <p class="subheading2"> 우리의 소중한 순간들</p>
+<div class="intro-text">
+  <div class="kor">우리의 소중한 순간들</div>
+  <div class="eng">Gallery</div>
+</div>
 </header>
 
 <main>
@@ -478,11 +491,15 @@ header { margin-top: 1.25rem; }
 
   <!-- 💒 오시는 길 (카카오맵) -->
   <section id="location" class="location-section">
-    <h2 class="location-title">오시는 길</h2>
+<div class="intro-text">
+  <div class="kor">오시는 길</div>
+  <div class="eng">Location Information</div>
+</div>
     <div class="location-card">
       <div class="map-wrap">
         <!-- ✅ 컨테이너 id와 timestamp가 반드시 동일해야 함 -->
         <div id="daumRoughmapContainer1762877507237" class="root_daum_roughmap root_daum_roughmap_landing" style="width:100%; height:360px;"></div>
+        <p class="map-address">서울 마포구 마포대로 92 효성해링턴스퀘어 B동 7층</p>
       </div>
       <div class="location-info">
         <p><strong>지하철</strong> : 공덕역 10번 출구 (경의 중앙선, 공항철도) 방향으로 나와 유턴 후, 전방 우측 효성해링턴 스퀘어 B동 7층 (도보 30초) </p>

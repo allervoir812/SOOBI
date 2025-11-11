@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
 
-<style>
+<style>  
 body {  
   font-family: 'Zen Kaku Gothic New', sans-serif;
   font-weight: 100;
@@ -192,8 +192,20 @@ header .subheading2 {
   line-height: 1.6;
 }
 .location-info strong { color: #2f6f4b; }
+
+    .location-info strong { color: #2f6f4b; }
+
+    /* ✅ Kakao RoughMap을 반응형으로: 내부 요소들을 100%로 강제 */
+    .root_daum_roughmap .wrap_map,
+    .root_daum_roughmap .map,
+    .root_daum_roughmap .map > div,
+    .root_daum_roughmap iframe {
+      width: 100% !important;
+    }  
 </style>
 </head>
+
+  
 <body>
 
 <header>

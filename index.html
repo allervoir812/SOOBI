@@ -989,7 +989,6 @@ body.modal-open{ overflow:hidden; } /* 모달 열릴 때 스크롤 잠금 */
     </div>
   </div>
 
-  <p class="count-caption" data-caption>00일 남았습니다</p>
 </div>
 
 
@@ -1364,8 +1363,6 @@ body.modal-open{ overflow:hidden; } /* 모달 열릴 때 스크롤 잠금 */
     set('hours', pad(hours));
     set('mins', pad(mins));
     set('secs', pad(secs));
-
-    $('[data-caption]').textContent = `${days+1}일 남았습니다`;
   }
   tick();
   setInterval(tick, 1000);

@@ -1365,7 +1365,7 @@ body.modal-open{ overflow:hidden; } /* 모달 열릴 때 스크롤 잠금 */
     set('mins', pad(mins));
     set('secs', pad(secs));
 
-    $('[data-caption]').textContent = `${days}일 남았습니다`;
+    $('[data-caption]').textContent = `${days+1}일 남았습니다`;
   }
   tick();
   setInterval(tick, 1000);

@@ -830,16 +830,19 @@ body.modal-open{ overflow:hidden; } /* 모달 열릴 때 스크롤 잠금 */
 }
   
 /* 메인 선언 아래 부모/본인 라인 — 영문 소제목과 동일 톤 */
-.intro-message .parents {
+  
+  .intro-message .parents {
   text-align: center;
   font-family: 'Lato', sans-serif;
   font-size: 0.8rem;
-  font-weight: 700;
+  font-weight: 400;     /* ✅ 글씨 얇게 */
   color: #555;
-  letter-spacing: 1.5px;
-  line-height: 1.6;
-  margin-top: .3rem;
+  letter-spacing: 1.2px;
+  line-height: 1.7;
+  margin-top: .6rem;    /* ✅ 제목과 약간 띄움 */
+  margin-bottom: 1.8rem; /* ✅ 아래 사진과 간격 넓힘 */
 }
+
 
 </style>
 </head>

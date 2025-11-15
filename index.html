@@ -90,71 +90,6 @@ text-align: left;
 flex-direction: column;
 line-height: 1.5;
 }
-.gallery {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-gap: 20px;
-padding: 1rem;
-font-weight: 100;
-}
-.gallery img {
-object-fit: cover;
-aspect-ratio: 1/1;
-border-radius: 8px;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-width: 100%;
-height: auto;
-display: block;
-transition: transform 0.3s ease;
-}
-.gallery img:hover {
-transform: scale(1.05);
-}
-.year-heading {
-position: relative;
-display: inline-block;
-font-size: 1rem;
-color: #729C70;
-margin: 0.5rem 0 0.25rem;
-padding: 0.1rem 0.4rem;
-background: rgba(255, 255, 0, 0.3);
-border-radius: 2.5px;
-line-height: 1;
-margin-left: 1.7rem;
-}
-@media (max-width: 768px) {
-header { font-size: 1.5rem; }
-.flip-card { width: 90vw; height: 90vw; }
-}
-
-#image-popup,
-#image-popup-overlay {
-opacity: 0;
-transition: opacity 0.3s ease;
-pointer-events: none;
-}
-#image-popup.show,
-#image-popup-overlay.show {
-opacity: 1;
-pointer-events: auto;
-}
-#image-popup {
-position: fixed; 
-top: 50%; 
-left: 50%;
-transform: translate(-50%, -50%);
-background: transparent;
-z-index: 9999;
-text-align: center;
-}
-#popup-img {
-width: 90vw;
-height: auto;
-border-radius: 12px;
-display: block;
-margin: 0 auto;
-box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
 
 /* ===== 오시는 길(카카오맵) 스타일 ===== */
 .location-section {
@@ -911,10 +846,42 @@ margin-bottom: 1.8rem; /* ✅ 아래 사진과 간격 넓힘 */
   aspect-ratio: 1/1;
   object-fit: cover;
   display: block;
-  border-radius: 6px;
 }
 
-/* 라이트박스 안 이미지 전환 애니메이션 (샤르르 느낌) */
+/* 🔍 라이트박스 전체 오버레이 */
+#wg-lightbox {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 12000;
+}
+
+/* 열릴 때 flex로 표시 */
+#wg-lightbox.show {
+  display: flex;
+}
+
+/* 닫기 버튼 스타일 */
+.wg-lightbox-close {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 0.4rem 0.7rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 12001; /* 이미지보다 위에 */
+}
+
+  
+  
+  /* 라이트박스 안 이미지 전환 애니메이션 (샤르르 느낌) */
 #wg-lightbox img {
   max-width: 92vw;
   max-height: 86vh;

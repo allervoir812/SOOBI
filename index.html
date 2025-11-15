@@ -1170,14 +1170,12 @@ color:#333; padding:.4rem .7rem; border-radius:10px; font-weight:700; cursor:poi
 
 /* 오른쪽 사진 */
 .ssw-img {
-  width: 40%;
-  height: 55vh;
-  object-fit: cover;        /* 자연스럽게 위아래로 긴 느낌 */
-  object-position: center;
-  border-radius: 0;         /* 모서리 절대 굴리지 않음 */
-  margin-right: 0.5rem;     /* 벽에서 아주 조~금 띄우기 */
+  width: 40%;           /* 필요하면 35~45% 조절 가능 */
+  height: auto;         /* 원본 비율 유지 */
+  object-fit: contain;  /* 절대 자르지 않음 */
+  border-radius: 0;     /* 모서리 각지게 */
+  margin-right: 0.5rem; /* 오른쪽 벽에서 살짝 띄우기 */
 }
-
 
 </style>
 </head>

@@ -196,6 +196,59 @@ margin-bottom: 0.25rem !important;  /* ✅ 문단 간 여백도 살짝 줄임 */
 
 }
 .location-info strong { color: #2f6f4b; }
+/* === 오시는 길 블록 스타일 (아이콘 + 줄 처리) === */
+.location-card {
+  border-radius: 16px;
+  padding: 1.5rem 1.25rem 1.75rem;
+  background: #fafaf7;        /* 기존 톤 비슷한 아주 옅은 베이지 */
+}
+
+.location-info {
+  margin-top: 1.1rem;
+}
+
+/* 각 교통수단 라인 */
+.loc-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem 0;
+}
+
+/* 동그라미 아이콘 */
+.loc-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #d7e0d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #729C70;             /* 네 사이트 초록색 */
+}
+
+/* 소제목 (지하철/버스/자가용) */
+.loc-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #729C70;
+  margin-bottom: 0.2rem;
+}
+
+/* 설명 텍스트 */
+.loc-body {
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* 구분선 */
+.loc-divider {
+  border: 0;
+  border-top: 1px solid #e2e7de;
+  margin: 0;
+}
 
 
 /* ✅ Kakao RoughMap을 반응형으로: 내부 요소들을 100%로 강제 */
@@ -1088,17 +1141,54 @@ color:#333; padding:.4rem .7rem; border-radius:10px; font-weight:700; cursor:poi
 
 </div>
 <div class="location-card">
-<div class="map-wrap">
-<!-- ✅ 컨테이너 id와 timestamp가 반드시 동일해야 함 -->
-<div id="daumRoughmapContainer1762877507237" class="root_daum_roughmap root_daum_roughmap_landing" style="width:100%; height:360px;"></div>
-</div>
-<div class="location-info">
-<p><strong>지하철</strong> : 공덕역 10번 출구 (경의 중앙선, 공항철도) 방향으로 나와 유턴 후, 전방 우측 효성해링턴 스퀘어 B동 7층 (도보 30초) </p>
-<p><strong>버스</strong> : Blue 간선 : 160, 260, 600 / Green 지선 : 7013A, 7013B, 7611
-마을버스 : 마포01, 마포02, 마포10 / 일반버스 : 1002</p>
-<p><strong>자가용</strong></strong> : (입력) 아펠가모 공덕 | 서울 마포구 마포대로 92 효성해링턴스퀘어 B동(주차가능) </p>
+  <div class="map-wrap">
+    <!-- ✅ 카카오맵 컨테이너는 그대로 유지 -->
+    <div id="daumRoughmapContainer1762877507237"
+         class="root_daum_roughmap root_daum_roughmap_landing"
+         style="width:100%; height:360px;"></div>
+  </div>
 
-</div>
+  <div class="location-info">
+    <!-- 지하철 -->
+    <div class="loc-group">
+      <div class="loc-icon">🚇</div>
+      <div>
+        <div class="loc-title">지하철</div>
+        <p class="loc-body">
+          공덕역 10번 출구 (경의 중앙선, 공항철도) 방향으로 나와 유턴 후, 전방 우측 효성해링턴 스퀘어 B동 7층 (도보 30초)
+        </p>
+      </div>
+    </div>
+
+    <hr class="loc-divider">
+
+    <!-- 버스 -->
+    <div class="loc-group">
+      <div class="loc-icon">🚌</div>
+      <div>
+        <div class="loc-title">버스</div>
+        <p class="loc-body">
+          Blue 간선 : 160, 260, 600<br>
+          Green 지선 : 7013A, 7013B, 7611<br>
+          마을버스 : 마포01, 마포02, 마포10<br>
+          일반버스 : 1002
+        </p>
+      </div>
+    </div>
+
+    <hr class="loc-divider">
+
+    <!-- 자가용 -->
+    <div class="loc-group">
+      <div class="loc-icon">🚗</div>
+      <div>
+        <div class="loc-title">자가용</div>
+        <p class="loc-body">
+          (입력) 아펠가모 공덕&nbsp;|&nbsp;서울 마포구 마포대로 92 효성해링턴스퀘어 B동 (주차가능)
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 </section>
 

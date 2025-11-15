@@ -1151,13 +1151,13 @@ color:#333; padding:.4rem .7rem; border-radius:10px; font-weight:700; cursor:poi
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 2rem 0;
   gap: 1.5rem;
+  margin: 2rem 0;
 }
 
-/* 텍스트는 왼쪽 영역 + 오른쪽 정렬 */
+/* 왼쪽 글 영역을 더 줄임 */
 .ssw-text {
-  flex: 1;
+  flex: 0 0 40%;   /* 이전보다 더 좁게 */
   text-align: right;
 }
 
@@ -1168,15 +1168,15 @@ color:#333; padding:.4rem .7rem; border-radius:10px; font-weight:700; cursor:poi
   text-align: right;
 }
 
-/* 오른쪽 사진 */
+/* 오른쪽 사진 영역을 더 키움 */
 .ssw-img {
-  width: 40%;           /* 필요하면 35~45% 조절 가능 */
-  height: auto;         /* 원본 비율 유지 */
-  object-fit: contain;  /* 절대 자르지 않음 */
-  border-radius: 0;     /* 모서리 각지게 */
-  margin-right: 0.5rem; /* 오른쪽 벽에서 살짝 띄우기 */
+  flex: 0 0 60%;   /* 사진 지분 더 크게 (원하는 만큼 조절 가능) */
+  width: 100%;
+  height: auto;
+  object-fit: contain;   /* 원본 그대로 */
+  border-radius: 0;
+  margin-right: 0.5rem;
 }
-
 </style>
 </head>
 

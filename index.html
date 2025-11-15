@@ -320,10 +320,11 @@ margin: 0 auto;
 
 /* 플립사진 위 "소개합니다 / Information" */
 .intro-text {
-width: 100%;
-text-align: center;
-margin: 7rem 0 1rem;
-line-height: 1.5;
+  width: 100%;              /* ✅ 120% → 100%로 줄이기 */
+  max-width: 820px;         /* 가운데 정렬용 최대 폭 */
+  margin: 7rem auto 1rem;   /* 좌우 auto로 중앙 정렬 */
+  text-align: center;
+  line-height: 1.5;
 }
 
 .intro-text .kor {

@@ -600,7 +600,16 @@ margin-top: 8rem !important;   /* ⬅️ 위쪽 여백 충분히 확보 */
 /* ===== Countdown (달력 하단 스톱워치 스타일) ===== */
 .countdown{
 max-width:820px; margin:2.2rem auto 0; text-align:center; padding:0 1rem;
+margin-bottom: 3rem;   /* 지도로부터 아래로 3rem 정도 여백 */
 }
+  
+/* === 타이머 숫자 + 라벨 회색 & 얇게 통일 === */
+.countdown,
+.countdown * {
+  font-weight: 400;
+  color: #555;
+}
+  
 .count-row{
 display:flex; justify-content:center; align-items:flex-end; gap:2.4rem;
 font-family:'Lato', sans-serif;

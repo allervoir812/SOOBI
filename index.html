@@ -1347,7 +1347,11 @@ letter-spacing: 0.02em;
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
 }
-
+  
+.single-line {
+  white-space: nowrap;
+}
+  
 </style>
 </head>
 
@@ -1532,7 +1536,9 @@ letter-spacing: 0.02em;
 
   <!-- ✅ 내비게이션 앱 바로가기 -->
   <div class="nav-app-links">
-  <div class="nav-app-desc">원하시는 앱을 선택하시면 길안내가 시작됩니다.</div>
+<p class="nav-app-desc">
+  <span class="single-line">원하시는 앱을 선택하시면 길안내가 나옵니다.</span>
+</p>
     <div class="nav-app-buttons">
       <!-- 네이버지도 (웹/앱 모두 열리는 형태) -->
       <a class="nav-app-btn naver"

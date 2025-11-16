@@ -1011,6 +1011,36 @@ border:1px solid var(--border); border-radius:12px; }
 .gb-item .meta{ font-size:.85rem; color:#6b7b88; display:flex; gap:.5rem; flex-wrap:wrap; }
 .gb-item .msg{ margin-top:.35rem; white-space:pre-wrap; color:#2b2b2b; line-height:1.6; }
 
+/* 개별 항목 하단 수정/삭제 버튼 */
+.gb-item-actions{
+  margin-top:.4rem;
+  display:flex;
+  gap:.4rem;
+  justify-content:flex-end;
+}
+
+.gb-item-actions button{
+  border:0;
+  background:#f1f3f5;
+  color:#555;
+  border-radius:999px;
+  padding:.2rem .6rem;
+  font-size:.8rem;
+  cursor:pointer;
+}
+
+.gb-item-actions button:hover{
+  background:#e0e4e8;
+}
+
+.gb-item-actions .gb-delete{
+  color:#c92a2a;
+}
+
+.gb-item-actions .gb-delete:hover{
+  background:#ffe3e3;
+}
+  
 /* 하단 감사문구 */
 .gb-thanks{  font-size: 0.95rem;
   color: #777;
@@ -2339,25 +2369,37 @@ const vName = $('#gb-view-name');
 const vPass = $('#gb-view-pass');
 const vBtn  = $('#gb-search');
 const vList = $('#gb-results');
-
 function render(list){
-if(list.length===0){
-vList.style.display='block';
-vList.innerHTML = '<div class="gb-item"><div class="msg">조회 결과가 없습니다.</div></div>';
-return;
+  if(list.length===0){
+    vList.style.display='block';
+    vList.innerHTML = '<div class="gb-item"><div class="msg">조회 결과가 없습니다.</div></div>';
+    return;
+  }
+  const html = list
+    .sort((a,b)=>b.id-a.id)
+    .map(it=>{
+      const d = new Date(it.at);
+      const time =
+        `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ` +
+        `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+      return `
+        <div class="gb-item" data-id="${it.id}">
+          <div class="meta">
+            <strong>${it.name}</strong>
+            <span>${time}</span>
+          </div>
+          <div class="msg">${escapeHtml(it.msg)}</div>
+          <div class="gb-item-actions">
+            <button type="button" class="gb-edit" data-action="edit">수정</button>
+            <button type="button" class="gb-delete" data-action="delete">삭제</button>
+          </div>
+        </div>`;
+    })
+    .join('');
+  vList.innerHTML = html;
+  vList.style.display='block';
 }
-const html = list.sort((a,b)=>b.id-a.id).map(it=>{
-const d = new Date(it.at);
-const time = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-return `
-       <div class="gb-item">
-         <div class="meta"><strong>${it.name}</strong><span>${time}</span></div>
-         <div class="msg">${escapeHtml(it.msg)}</div>
-       </div>`;
-}).join('');
-vList.innerHTML = html;
-vList.style.display='block';
-}
+
 
 function escapeHtml(s){
 return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -2378,6 +2420,58 @@ result = all.filter(it => it.pass===p && it.name===n);
 render(result);
 });
 
+// ---------- 편집/삭제 (조회 결과 리스트에서) ----------
+vList.addEventListener('click', (e)=>{
+  const btn = e.target.closest('button[data-action]');
+  if (!btn) return;
+
+  const itemEl = btn.closest('.gb-item');
+  if (!itemEl) return;
+
+  const id = itemEl.getAttribute('data-id');
+  if (!id) return;
+
+  let all = load();
+  const idx = all.findIndex(it => String(it.id) === String(id));
+  if (idx === -1) return;
+
+  const name = vName.value.trim();
+  const pass = vPass.value.trim();
+  const isMaster = (pass === MASTER);
+
+  // ▶ 수정
+  if (btn.dataset.action === 'edit') {
+    const current = all[idx];
+    const next = prompt('수정할 내용을 입력해주세요.', current.msg);
+    if (next === null) return;          // 취소
+    const trimmed = next.trim();
+    if (!trimmed) {
+      alert('내용이 비어 있습니다.');
+      return;
+    }
+    all[idx].msg = trimmed;
+    all[idx].at  = new Date().toISOString();
+    save(all);
+  }
+
+  // ▶ 삭제
+  if (btn.dataset.action === 'delete') {
+    if (!confirm('정말 삭제하시겠습니까?')) return;
+    all.splice(idx, 1);
+    save(all);
+  }
+
+  // ▶ 다시 현재 조건(name + pass)으로 필터해서 렌더링
+  let result = [];
+  if (isMaster) {
+    result = all;   // 마스터 비밀번호면 전체
+  } else {
+    result = all.filter(it => it.pass === pass && it.name === name);
+  }
+  render(result);
+});
+
+  
 })();
 </script>
 <script>

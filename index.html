@@ -216,18 +216,7 @@ margin-bottom: 0.25rem !important;  /* ✅ 문단 간 여백도 살짝 줄임 */
   padding: 0.85rem 0;
 }
 
-/* 동그라미 아이콘 */
-.loc-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid #d7e0d4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  color: #729C70;             /* 네 사이트 초록색 */
-}
+
 
 /* 소제목 (지하철/버스/자가용) */
 .loc-title {
@@ -307,6 +296,66 @@ transform: none !important;
 opacity: 1 !important;
 }
 }
+
+/* ===== 내비게이션 앱 바로가기 ===== */
+.nav-app-links {
+  max-width: 820px;
+  margin: 1.4rem auto 0;
+  padding: 1rem 1.5rem 1.3rem;
+  text-align: center;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+.nav-app-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+
+.nav-app-desc {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 0.9rem;
+}
+
+.nav-app-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.nav-app-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+  min-width: 110px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+.nav-app-btn:active {
+  transform: translateY(1px);
+}
+
+/* 브랜드 느낌만 살짝 */
+.nav-app-btn.naver {
+  /* 네이버 초록 느낌만 아주 살짝 */
+}
+
+.nav-app-btn.kakao {
+  /* 카카오 노랑 느낌만 아주 살짝 줄 거면 background 살짝만 바꿔도 됨 */
+}
+
+
 
 /* === 상단 이름 좌/우 배치 (모바일 포함) === */
 .header-names {
@@ -1451,6 +1500,32 @@ color:#333; padding:.4rem .7rem; border-radius:10px; font-weight:700; cursor:poi
     <!-- 카카오맵 컨테이너는 그대로 사용 -->
     <div id="daumRoughmapContainer1762877507237"
          class="root_daum_roughmap root_daum_roughmap_landing"></div>
+  </div>
+  <div class="map-wrap">
+    <!-- 카카오맵 컨테이너는 그대로 사용 -->
+    <div id="daumRoughmapContainer1762877507237"
+         class="root_daum_roughmap root_daum_roughmap_landing"></div>
+  </div>
+
+  <!-- ✅ 내비게이션 앱 바로가기 -->
+  <div class="nav-app-links">
+    <div class="nav-app-title">내비게이션</div>
+    <div class="nav-app-desc">원하시는 앱을 선택하시면 길안내가 시작됩니다.</div>
+    <div class="nav-app-buttons">
+      <!-- 네이버지도 (웹/앱 모두 열리는 형태) -->
+      <a class="nav-app-btn naver"
+         href="https://map.naver.com/v5/search/%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95"
+         target="_blank" rel="noopener noreferrer">
+        네이버지도
+      </a>
+
+      <!-- 카카오맵 -->
+      <a class="nav-app-btn kakao"
+         href="https://map.kakao.com/link/search/%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95"
+         target="_blank" rel="noopener noreferrer">
+        카카오맵
+      </a>
+    </div>
   </div>
 
   <div class="location-info">

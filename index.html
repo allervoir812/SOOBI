@@ -1348,7 +1348,127 @@ letter-spacing: 0.02em;
 .single-line {
   white-space: nowrap;
 }
-  
+/* ===== 마음 전하실 곳 - 계좌 아코디언 ===== */
+.account-section{
+  max-width:820px;
+  margin:4rem auto 5rem;
+  padding:0 1.5rem;
+  text-align:center;
+}
+
+.account-desc{
+  margin-top:0.9rem;
+  margin-bottom:1.6rem;
+  font-size:0.9rem;
+  line-height:1.7;
+  color:#888;
+}
+
+.acc-accordion{
+  display:flex;
+  flex-direction:column;
+  gap:0.75rem;
+}
+
+/* 상단 버튼 */
+.acc-header{
+  width:100%;
+  text-align:left;
+  padding:0.9rem 1.1rem;
+  border-radius:16px;
+  border:0;
+  background:#fff;
+  box-shadow:0 4px 14px rgba(0,0,0,.06);
+  font-size:0.95rem;
+  color:#444;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+}
+
+.acc-header .chevron{
+  font-size:1rem;
+  transition:transform .2s ease;
+}
+
+.acc-header.open .chevron{
+  transform:rotate(180deg);
+}
+
+/* 펼쳐지는 영역 */
+.acc-panel{
+  display:none;
+  padding:0.2rem 0;
+}
+
+.acc-panel.open{
+  display:block;
+}
+
+/* 개별 카드 */
+.acc-card{
+  margin-top:0.7rem;
+  padding:0.9rem 1rem;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 4px 14px rgba(0,0,0,.05);
+  text-align:left;
+}
+
+.acc-card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:0.9rem;
+  margin-bottom:0.55rem;
+}
+
+.acc-role{
+  color:#777;
+}
+
+.acc-name{
+  color:#333;
+  font-weight:700;
+}
+
+/* 복사 버튼 */
+.acc-copy{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  background:#f5f5f5;
+  padding:0.7rem 0.9rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  font-size:0.9rem;
+}
+
+.acc-bank{
+  color:#888;
+}
+
+.acc-num{
+  margin-left:0.6rem;
+  color:#333;
+  font-weight:600;
+  flex:1;
+}
+
+.acc-copy-icon{
+  font-size:0.8rem;
+  color:#666;
+}
+
+/* 모바일 약간 축소 */
+@media (max-width:600px){
+  .acc-card-top{ font-size:0.85rem; }
+  .acc-copy{ font-size:0.85rem; }
+}
+
 </style>
 </head>
 
@@ -1715,16 +1835,123 @@ letter-spacing: 0.02em;
 
 <!-- 💌 마음 전하실 곳 -->
 <section id="account" class="account-section">
-<div class="intro-text">
-<div class="kor">마음 전하실 곳</div>
-<div class="eng">MONEY PLEASE</div>
-</div>
+  <div class="intro-text">
+    <div class="kor">마음 전하실 곳</div>
+    <div class="eng">MONEY PLEASE</div>
+  </div>
 
-<div class="account-info">
-<p><strong>신랑</strong> : 원성수&nbsp;&nbsp;|&nbsp;&nbsp;국민은행 123456-78-91011</p>
-<p><strong>신부</strong> : 오한비&nbsp;&nbsp;|&nbsp;&nbsp;신한은행 987-65-43210</p>
-</div>
+  <p class="account-desc">
+    참석이 어려우신 분들을 위해 계좌번호를 기재했습니다.<br>
+    너그러우신 마음으로 양해 부탁드립니다.
+  </p>
+
+  <div class="acc-accordion">
+    <!-- 신랑측 -->
+    <button type="button" class="acc-header" data-target="acc-groom">
+      <span>신랑측에게</span>
+      <span class="chevron">▾</span>
+    </button>
+    <div id="acc-groom" class="acc-panel">
+      <!-- 신랑 -->
+      <div class="acc-card">
+        <div class="acc-card-top">
+          <span class="acc-role">신랑</span>
+          <span class="acc-name">원성수</span>
+        </div>
+        <button type="button"
+                class="acc-copy"
+                data-account="국민은행 123456-78-91011">
+          <span class="acc-bank">국민은행</span>
+          <span class="acc-num">123456-78-91011</span>
+          <span class="acc-copy-icon">복사</span>
+        </button>
+      </div>
+
+      <!-- 신랑 아버지 -->
+      <div class="acc-card">
+        <div class="acc-card-top">
+          <span class="acc-role">신랑 아버지</span>
+          <span class="acc-name">원중선</span>
+        </div>
+        <button type="button"
+                class="acc-copy"
+                data-account="국민은행 000000-00-00000">
+          <span class="acc-bank">국민은행</span>
+          <span class="acc-num">000000-00-00000</span>
+          <span class="acc-copy-icon">복사</span>
+        </button>
+      </div>
+
+      <!-- 신랑 어머니 -->
+      <div class="acc-card">
+        <div class="acc-card-top">
+          <span class="acc-role">신랑 어머니</span>
+          <span class="acc-name">박은순</span>
+        </div>
+        <button type="button"
+                class="acc-copy"
+                data-account="국민은행 000000-00-00000">
+          <span class="acc-bank">국민은행</span>
+          <span class="acc-num">000000-00-00000</span>
+          <span class="acc-copy-icon">복사</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 신부측 -->
+    <button type="button" class="acc-header" data-target="acc-bride">
+      <span>신부측에게</span>
+      <span class="chevron">▾</span>
+    </button>
+    <div id="acc-bride" class="acc-panel">
+      <!-- 신부 -->
+      <div class="acc-card">
+        <div class="acc-card-top">
+          <span class="acc-role">신부</span>
+          <span class="acc-name">오한비</span>
+        </div>
+        <button type="button"
+                class="acc-copy"
+                data-account="신한은행 987-65-43210">
+          <span class="acc-bank">신한은행</span>
+          <span class="acc-num">987-65-43210</span>
+          <span class="acc-copy-icon">복사</span>
+        </button>
+      </div>
+
+      <!-- 신부 아버지 -->
+      <div class="acc-card">
+        <div class="acc-card-top">
+          <span class="acc-role">신부 아버지</span>
+          <span class="acc-name">오현택</span>
+        </div>
+        <button type="button"
+                class="acc-copy"
+                data-account="신한은행 000000-00-00000">
+          <span class="acc-bank">신한은행</span>
+          <span class="acc-num">000000-00-00000</span>
+          <span class="acc-copy-icon">복사</span>
+        </button>
+      </div>
+
+      <!-- 신부 어머니 -->
+      <div class="acc-card">
+        <div class="acc-card-top">
+          <span class="acc-role">신부 어머니</span>
+          <span class="acc-name">유민경</span>
+        </div>
+        <button type="button"
+                class="acc-copy"
+                data-account="신한은행 000000-00-00000">
+          <span class="acc-bank">신한은행</span>
+          <span class="acc-num">000000-00-00000</span>
+          <span class="acc-copy-icon">복사</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </section>
+
 
 <!-- ===== GUESTBOOK ===== -->
 <section id="guestbook" class="guestbook">

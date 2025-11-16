@@ -635,11 +635,12 @@ margin-top: 8rem !important;   /* ⬅️ 위쪽 여백 충분히 확보 */
   margin: 0.35rem 0;
 }
 
-/* “성수♥한비” 하트 색 */
-.count-phrase-top .heart {
-  color: #e18aa5;        /* 은은한 핑크 */
-  font-size: 1.05em;
-  vertical-align: -0.05em;
+
+.heart-fade {
+  opacity: 0.35;
+  color: #8B7A50; 
+  display: inline-block;
+  transform: translateY(-1px);
 }
 
 /* ===== Countdown (달력 하단 스톱워치 스타일) ===== */
@@ -1396,9 +1397,9 @@ color:#333; padding:.4rem .7rem; border-radius:10px; font-weight:700; cursor:poi
   <div class="count-divider"></div>
 
   <!-- 위 문구 -->
-  <p class="count-phrase-top">
-    성수<span class="heart">♥</span>한비 결혼식이
-  </p>
+<div class="count-phrase-top">
+  성수<span class="heart-fade"> ♥ </span>한비 결혼식이
+</div>
 
   <!-- 실제 카운트다운 타이머 -->
   <div class="countdown" id="wedding-countdown" aria-label="예식까지 남은 시간">

@@ -606,6 +606,38 @@ padding: 0.35rem 0;            /* 위아래 여백도 살짝 추가 */
 .wedding-plain .intro-text {
 margin-top: 8rem !important;   /* ⬅️ 위쪽 여백 충분히 확보 */
 }
+
+/* === Countdown 영역 래퍼 + 문구 === */
+.count-wrap {
+  max-width: 820px;
+  margin: 2rem auto 3rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+/* 달력 밑 가느다란 실선 (양 벽에 안 붙게) */
+.count-divider {
+  width: 90%;
+  max-width: 640px;
+  margin: 1.5rem auto 1rem;
+  border-top: 1px solid #ddd;
+}
+
+/* 위/아래 문구 공통 */
+.count-phrase-top,
+.count-phrase-bottom {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0.35rem 0;
+}
+
+/* “성수♥한비” 하트 색 */
+.count-phrase-top .heart {
+  color: #e18aa5;        /* 은은한 핑크 */
+  font-size: 1.05em;
+  vertical-align: -0.05em;
+}
+
 /* ===== Countdown (달력 하단 스톱워치 스타일) ===== */
 .countdown{
   max-width:820px;
@@ -1355,25 +1387,48 @@ color:#333; padding:.4rem .7rem; border-radius:10px; font-weight:700; cursor:poi
 </tbody>
 </table>
 <!-- ⏱️ Countdown -->
-<div class="countdown" id="wedding-countdown" aria-label="예식까지 남은 시간">
-<div class="count-row">
-<div class="count-block">
-<label>DAYS</label>
-<div class="value" data-unit="days">00</div>
-</div>
+<div class="count-wrap">
+  <!-- 달력 밑 가느다란 실선 -->
+  <div class="count-divider"></div>
 
-<span class="count-sep"> </span>
+  <!-- 위 문구 -->
+  <p class="count-phrase-top">
+    성수<span class="heart">♥</span>한비 결혼식이
+  </p>
 
-<div class="count-block">
-<label>HOUR</label>
-<div class="value" data-unit="hours">00</div>
-</div>
+  <!-- 실제 카운트다운 타이머 -->
+  <div class="countdown" id="wedding-countdown" aria-label="예식까지 남은 시간">
+    <div class="count-row">
+      <div class="count-block">
+        <label>DAYS</label>
+        <div class="value" data-unit="days">00</div>
+      </div>
 
-<span class="colon">:</span>
+      <span class="count-sep"> </span>
 
-<div class="count-block">
-<label>MIN</label>
-<div class="value" data-unit="mins">00</div>
+      <div class="count-block">
+        <label>HOUR</label>
+        <div class="value" data-unit="hours">00</div>
+      </div>
+
+      <span class="colon">:</span>
+
+      <div class="count-block">
+        <label>MIN</label>
+        <div class="value" data-unit="mins">00</div>
+      </div>
+
+      <span class="colon">:</span>
+
+      <div class="count-block">
+        <label>SEC</label>
+        <div class="value" data-unit="secs">00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 아래 문구 -->
+  <p class="count-phrase-bottom">남았습니다</p>
 </div>
 
 <span class="colon">:</span>

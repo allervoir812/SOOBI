@@ -1392,7 +1392,7 @@ letter-spacing: 0.02em;
 <img src="images/34.jpg" alt="결혼사진" />
 </div>
 <div class="intro-lines">
-<p>닮은 모습에서 사랑을 시작했고,</p>
+<p>닮은 서로의 모습을 보며 사랑을 시작했고,</p>
 <p>다른 모습 속에서 서로여야만하는 이유를 찾았습니다.</p>
 <br>
 <p>이제는 같은 길을 걸으며</p>
@@ -1516,72 +1516,67 @@ letter-spacing: 0.02em;
   <p class="count-phrase-bottom">남았습니다</p>
 </div>
 
-
-
-
 <!-- 💒 오시는 길 (카카오맵) --> 
-
 <div class="intro-text">
-<div class="kor">오시는 길</div>
-<div class="eng">LOCATION</div>
-<div class="location_detail">아펠가모 공덕 | 마리에홀</div>
-<div class="location_detail2">서울 마포구 마포대로 92 효성해링턴스퀘어 B동 7층</div>
-
+  <div class="kor">오시는 길</div>
+  <div class="eng">LOCATION</div>
+  <div class="location_detail">아펠가모 공덕 | 마리에홀</div>
+  <div class="location_detail2">서울 마포구 마포대로 92 효성해링턴스퀘어 B동 7층</div>
 </div>
 
-  <div class="map-wrap">
-    <!-- 카카오맵 컨테이너는 그대로 사용 -->
-    <div id="daumRoughmapContainer1762877507237"
-         class="root_daum_roughmap root_daum_roughmap_landing"></div>
+<!-- ✅ 지도만 들어가는 영역 -->
+<div class="map-wrap">
+  <div id="daumRoughmapContainer1762877507237"
+       class="root_daum_roughmap root_daum_roughmap_landing"></div>
+</div>  <!-- ← 여기서 map-wrap 끝! -->
 
-  <!-- ✅ 내비게이션 앱 바로가기 -->
-  <div class="nav-app-links">
-<p class="nav-app-desc">
-  <span class="single-line">원하시는 앱을 선택하시면 길안내가 나옵니다.</span>
-</p>
-    <div class="nav-app-buttons">
-      <!-- 네이버지도 (웹/앱 모두 열리는 형태) -->
-      <a class="nav-app-btn naver"
-         href="https://map.naver.com/v5/search/%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95"
-         target="_blank" rel="noopener noreferrer">
-        네이버지도
-      </a>
+<!-- ✅ 내비게이션 앱 바로가기 -->
+<div class="nav-app-links">
+  <p class="nav-app-desc">
+    <span class="single-line">원하시는 앱을 선택하시면 길안내가 나옵니다.</span>
+  </p>
+  <div class="nav-app-buttons">
+    <a class="nav-app-btn naver"
+       href="https://map.naver.com/v5/search/%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95"
+       target="_blank" rel="noopener noreferrer">
+      네이버지도
+    </a>
+    <a class="nav-app-btn kakao"
+       href="https://map.kakao.com/link/search/%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95"
+       target="_blank" rel="noopener noreferrer">
+      카카오맵
+    </a>
+  </div>
+</div>
 
-      <!-- 카카오맵 -->
-      <a class="nav-app-btn kakao"
-         href="https://map.kakao.com/link/search/%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95"
-         target="_blank" rel="noopener noreferrer">
-        카카오맵
-      </a>
-    </div>
+<!-- ✅ 지하철 / 버스 / 자가용 안내 -->
+<div class="location-info">
+  <div class="loc-row">
+    <div class="loc-label">지하철</div>
+    <p class="loc-text">
+      공덕역 10번 출구 (경의 중앙선, 공항철도) 방향으로 나와 유턴 후,<br>
+      전방 우측 효성해링턴 스퀘어 B동 7층 (도보 30초)
+    </p>
   </div>
 
-  <div class="location-info">
-    <div class="loc-row">
-      <div class="loc-label">지하철</div>
-      <p class="loc-text">
-        공덕역 10번 출구 (경의 중앙선, 공항철도) 방향으로 나와 유턴 후,<br>
-        전방 우측 효성해링턴 스퀘어 B동 7층 (도보 30초)
-      </p>
-    </div>
-
-    <div class="loc-row">
-      <div class="loc-label">버스</div>
-      <p class="loc-text">
-        Blue 간선 : 160, 260, 600<br>
-        Green 지선 : 7013A, 7013B, 7611<br>
-        마을버스 : 마포01, 마포02, 마포10<br>
-        일반버스 : 1002
-      </p>
-    </div>
-
-    <div class="loc-row">
-      <div class="loc-label">자가용</div>
-      <p class="loc-text">
-        (입력) 아펠가모 공덕 | 서울 마포구 마포대로 92 효성해링턴스퀘어 B동 (주차가능)
-      </p>
-    </div>
+  <div class="loc-row">
+    <div class="loc-label">버스</div>
+    <p class="loc-text">
+      Blue 간선 : 160, 260, 600<br>
+      Green 지선 : 7013A, 7013B, 7611<br>
+      마을버스 : 마포01, 마포02, 마포10<br>
+      일반버스 : 1002
+    </p>
   </div>
+
+  <div class="loc-row">
+    <div class="loc-label">자가용</div>
+    <p class="loc-text">
+      (입력) 아펠가모 공덕 | 서울 마포구 마포대로 92 효성해링턴스퀘어 B동 (주차가능)
+    </p>
+  </div>
+</div>
+
 
 <!-- 🔔 연락하기 (컨택 포인트) -->
 <section id="contact" class="contact-section">

@@ -1514,7 +1514,17 @@ letter-spacing: 0.02em;
     padding: 0.6rem 0;      /* 좌우 여백 줄여서 폭 확보 */
   }
 }
-
+/* 달력 위 2026년 2월 제목 */
+.calendar-title {
+  font-family: 'Lato', sans-serif;   /* 카운트다운 숫자 폰트 */
+  font-size: 1.8rem;                 /* 큼직하게 (카운트다운 숫자 비슷하게) */
+  font-weight: 400;                  /* 숫자처럼 얇게 */
+  color: #555;                       /* 평일 숫자색 (#555 정도) */
+  text-align: center;
+  margin-top: 1.8rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.03em;
+}
 </style>
 </head>
 
@@ -1623,6 +1633,7 @@ letter-spacing: 0.02em;
 
 <div class="datetime">2026. 02. 08 (일) 오전 11시 30분</div>
 <!-- 2026년 2월 달력 (일 ~ 토) : 실제 배치에 맞춘 그리드 -->
+<div class="calendar-title">2026년 2월</div>
 <table class="cal" aria-label="2026년 2월 달력">
 <thead>
 <tr>

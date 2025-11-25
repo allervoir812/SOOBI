@@ -1496,6 +1496,25 @@ letter-spacing: 0.02em;
   border-color: #C7E0FF;
   color: #1A73E8;          /* 티맵 느낌의 진한 파랑 */
 }
+
+/* 모바일에서 TMAP / 네이버 / 카카오 버튼을 3등분으로 한 줄 정렬 */
+@media (max-width: 600px) {
+  .nav-app-buttons {
+    display: flex;
+    flex-wrap: nowrap;      /* 줄바꿈 금지 */
+    justify-content: space-between;
+    gap: 0.4rem;            /* 버튼 사이 여백 최소화 */
+  }
+
+  .nav-app-btn {
+    flex: 1;                /* 버튼 너비 자동 동일 배분 */
+    min-width: 0;           /* 강제로 줄바꿈 방지 */
+    text-align: center;
+    white-space: nowrap;    /* 버튼 글자 줄바꿈 방지 */
+    padding: 0.6rem 0;      /* 좌우 여백 줄여서 폭 확보 */
+  }
+}
+
 </style>
 </head>
 

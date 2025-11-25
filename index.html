@@ -1490,7 +1490,12 @@ letter-spacing: 0.02em;
   .acc-card-top{ font-size:0.85rem; }
   .acc-copy{ font-size:0.85rem; }
 }
-
+/* TMAP 버튼 – 블루 계열 */
+.nav-app-btn.tmap {
+  background: #E3F0FF;     /* 연한 블루 */
+  border-color: #C7E0FF;
+  color: #1A73E8;          /* 티맵 느낌의 진한 파랑 */
+}
 </style>
 </head>
 
@@ -1676,18 +1681,25 @@ letter-spacing: 0.02em;
   <p class="nav-app-desc">
     <span class="single-line">원하시는 앱을 선택하시면 길안내가 나옵니다.</span>
   </p>
-  <div class="nav-app-buttons">
-    <a class="nav-app-btn naver"
-       href="https://map.naver.com/v5/search/%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95"
-       target="_blank" rel="noopener noreferrer">
-      네이버지도
-    </a>
-    <a class="nav-app-btn kakao"
-       href="https://map.kakao.com/link/search/%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95"
-       target="_blank" rel="noopener noreferrer">
-      카카오맵
-    </a>
-  </div>
+<div class="nav-app-buttons">
+  <a class="nav-app-btn tmap"
+     href="https://tmapapp.tmap.co.kr/tmap2/mobile/route?goalname=아펠가모%20공덕&goalx=126.953542&goaly=37.543742"
+     target="_blank" rel="noopener noreferrer">
+     티맵
+  </a>
+
+  <a class="nav-app-btn naver"
+     href="https://map.naver.com/v5/search/%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95"
+     target="_blank" rel="noopener noreferrer">
+     네이버지도
+  </a>
+
+  <a class="nav-app-btn kakao"
+     href="https://map.kakao.com/link/search/%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95"
+     target="_blank" rel="noopener noreferrer">
+     카카오맵
+  </a>
+</div>
 </div>
 
 <!-- ✅ 지하철 / 버스 / 자가용 안내 -->

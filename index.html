@@ -2190,209 +2190,165 @@ setInterval(tick, 1000);
 
 
 <script>
-/* ====== Guestbook Logic (localStorage) ======
-  NOTE: 현재는 브라우저 저장입니다. 여러 기기에서 공유하려면
-  fetch('/api/guestbook') 같은 백엔드 연동만 교체하면 됩니다.
-*/
+/* ====== Guestbook Logic (Google Sheet API) ====== */
 (function(){
-const LS_KEY = 'wedding_guestbook_v1';
-const MASTER = '04050812';
+  // 👉 여기를 네 Apps Script 웹 앱 URL로 바꿔 넣기
+  const API_URL = 'https://script.google.com/macros/s/AKfycbw_ZwIfM0wUJZgZJFyO1jPuUNu6inbun6Dd5GordciwHcgICFuCq6TIpQpijFDmM7kJlA/exec'; 
+  const MASTER = '04050812';
 
-const $ = sel => document.querySelector(sel);
-const on = (el, ev, fn) => el && el.addEventListener(ev, fn);
+  const $ = sel => document.querySelector(sel);
+  const on = (el, ev, fn) => el && el.addEventListener(ev, fn);
 
-// ---------- storage helpers ----------
-function load(){
-try{ return JSON.parse(localStorage.getItem(LS_KEY)) || []; }
-catch(e){ return []; }
-}
-function save(arr){ localStorage.setItem(LS_KEY, JSON.stringify(arr)); }
-
-// ---------- modal helpers ----------
-function openModal(id){
-const el = document.getElementById(id);
-if(!el) return;
-el.classList.add('show');
-el.setAttribute('aria-hidden','false');
-document.body.classList.add('modal-open');
-const focusable = el.querySelector('input,textarea,button');
-if(focusable) focusable.focus();
-}
-function closeModal(id){
-const el = document.getElementById(id);
-if(!el) return;
-el.classList.remove('show');
-el.setAttribute('aria-hidden','true');
-document.body.classList.remove('modal-open');
-}
-document.querySelectorAll('.panel-close').forEach(btn=>{
-on(btn, 'click', ()=> closeModal(btn.getAttribute('data-close')));
-});
-// 클릭 시 바깥 영역 닫기
-document.querySelectorAll('.gb-modal').forEach(m=>{
-on(m,'click',e=>{ if(e.target===m) m.querySelector('.panel-close').click(); });
-});
-on(window,'keydown',e=>{
-if(e.key==='Escape'){
-document.querySelectorAll('.gb-modal.show .panel-close').forEach(b=>b.click());
-}
-});
-
-// ---------- Open buttons ----------
-on($('#gb-open-write'), 'click', ()=> openModal('gb-modal-write'));
-on($('#gb-open-view'), 'click', ()=> openModal('gb-modal-view'));
-
-// ---------- Writer form ----------
-const nameEl = $('#gb-name');
-const passEl = $('#gb-pass');
-const msgEl  = $('#gb-msg');
-const sendEl = $('#gb-send');
-const cntEl  = $('#gb-count');
-
-function validateWrite(){
-const ok = (nameEl.value.trim().length>0) &&
-(passEl.value.trim().length>0) &&
-(msgEl.value.trim().length>0);
-sendEl.disabled = !ok;
-}
-['input','keyup'].forEach(ev=>{
-on(nameEl, ev, validateWrite);
-on(passEl, ev, validateWrite);
-on(msgEl , ev, (e)=>{ cntEl.textContent = e.target.value.length; validateWrite(); });
-});
-
-on(sendEl,'click',()=>{
-const name = nameEl.value.trim();
-const pass = passEl.value.trim();
-const msg  = msgEl.value.trim();
-if(!name || !pass || !msg) return;
-
-const list = load();
-list.push({
-id: Date.now(),
-name, pass, msg,
-at: new Date().toISOString()
-});
-save(list);
-
-// reset & close
-nameEl.value = ''; passEl.value = ''; msgEl.value = ''; cntEl.textContent = '0';
-sendEl.disabled = true;
-closeModal('gb-modal-write');
-alert('메시지가 저장되었습니다. (동일 브라우저 기준)');
-});
-
-// ---------- Viewer ----------
-const vName = $('#gb-view-name');
-const vPass = $('#gb-view-pass');
-const vBtn  = $('#gb-search');
-const vList = $('#gb-results');
-function render(list){
-  if(list.length===0){
-    vList.style.display='block';
-    vList.innerHTML = '<div class="gb-item"><div class="msg">조회 결과가 없습니다.</div></div>';
-    return;
+  // ---------- API helper ----------
+  async function callApi(action, payload) {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, ...payload })
+    });
+    return res.json();
   }
-  const html = list
-    .sort((a,b)=>b.id-a.id)
-    .map(it=>{
+
+  // ---------- modal helpers ----------
+  function openModal(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.classList.add('show');
+    el.setAttribute('aria-hidden','false');
+    document.body.classList.add('modal-open');
+    const focusable = el.querySelector('input,textarea,button');
+    if(focusable) focusable.focus();
+  }
+  function closeModal(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.classList.remove('show');
+    el.setAttribute('aria-hidden','true');
+    document.body.classList.remove('modal-open');
+  }
+
+  document.querySelectorAll('.panel-close').forEach(btn=>{
+    on(btn, 'click', ()=> closeModal(btn.getAttribute('data-close')));
+  });
+  document.querySelectorAll('.gb-modal').forEach(m=>{
+    on(m,'click',e=>{ if(e.target===m) m.querySelector('.panel-close').click(); });
+  });
+  on(window,'keydown',e=>{
+    if(e.key==='Escape'){
+      document.querySelectorAll('.gb-modal.show .panel-close').forEach(b=>b.click());
+    }
+  });
+
+  // ---------- Open buttons ----------
+  on($('#gb-open-write'), 'click', ()=> openModal('gb-modal-write'));
+  on($('#gb-open-view'), 'click', ()=> openModal('gb-modal-view'));
+
+  // ---------- Writer form ----------
+  const nameEl = $('#gb-name');
+  const passEl = $('#gb-pass');
+  const msgEl  = $('#gb-msg');
+  const sendEl = $('#gb-send');
+  const cntEl  = $('#gb-count');
+
+  function validateWrite(){
+    const ok = (nameEl.value.trim().length>0) &&
+               (passEl.value.trim().length>0) &&
+               (msgEl.value.trim().length>0);
+    sendEl.disabled = !ok;
+  }
+  ['input','keyup'].forEach(ev=>{
+    on(nameEl, ev, validateWrite);
+    on(passEl, ev, validateWrite);
+    on(msgEl , ev, (e)=>{
+      cntEl.textContent = e.target.value.length;
+      validateWrite();
+    });
+  });
+
+  on(sendEl,'click', async ()=>{
+    const name = nameEl.value.trim();
+    const pass = passEl.value.trim();
+    const msg  = msgEl.value.trim();
+    if(!name || !pass || !msg) return;
+
+    try {
+      const result = await callApi('add', { name, pass, msg });
+      if (!result.ok) {
+        alert('저장 중 오류가 발생했어요: ' + (result.error || ''));
+        return;
+      }
+
+      nameEl.value = '';
+      passEl.value = '';
+      msgEl.value  = '';
+      cntEl.textContent = '0';
+      sendEl.disabled = true;
+      closeModal('gb-modal-write');
+      alert('메시지가 저장되었습니다. 감사합니다!');
+    } catch (e) {
+      alert('서버와 통신에 실패했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  });
+
+  // ---------- Viewer ----------
+  const vName = $('#gb-view-name');
+  const vPass = $('#gb-view-pass');
+  const vBtn  = $('#gb-search');
+  const vList = $('#gb-results');
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, m => (
+      {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]
+    ));
+  }
+
+  function render(list){
+    if(!list || list.length===0){
+      vList.style.display='block';
+      vList.innerHTML = '<div class="gb-item"><div class="msg">조회 결과가 없습니다.</div></div>';
+      return;
+    }
+    const html = list.map(it=>{
       const d = new Date(it.at);
       const time =
         `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ` +
         `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
       return `
-        <div class="gb-item" data-id="${it.id}">
+        <div class="gb-item">
           <div class="meta">
-            <strong>${it.name}</strong>
+            <strong>${escapeHtml(it.name)}</strong>
             <span>${time}</span>
           </div>
           <div class="msg">${escapeHtml(it.msg)}</div>
-          <div class="gb-item-actions">
-            <button type="button" class="gb-edit" data-action="edit">수정</button>
-            <button type="button" class="gb-delete" data-action="delete">삭제</button>
-          </div>
         </div>`;
-    })
-    .join('');
-  vList.innerHTML = html;
-  vList.style.display='block';
-}
+    }).join('');
+    vList.innerHTML = html;
+    vList.style.display='block';
+  }
 
-
-function escapeHtml(s){
-return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-}
-
-on(vBtn,'click', ()=>{
-const n = vName.value.trim();
-const p = vPass.value.trim();
-if(!p){ alert('비밀번호를 입력해주세요.'); return; }
-
-const all = load();
-let result = [];
-if(p === MASTER){
-result = all; // 마스터: 전체 조회
-}else{
-result = all.filter(it => it.pass===p && it.name===n);
-}
-render(result);
-});
-
-// ---------- 편집/삭제 (조회 결과 리스트에서) ----------
-vList.addEventListener('click', (e)=>{
-  const btn = e.target.closest('button[data-action]');
-  if (!btn) return;
-
-  const itemEl = btn.closest('.gb-item');
-  if (!itemEl) return;
-
-  const id = itemEl.getAttribute('data-id');
-  if (!id) return;
-
-  let all = load();
-  const idx = all.findIndex(it => String(it.id) === String(id));
-  if (idx === -1) return;
-
-  const name = vName.value.trim();
-  const pass = vPass.value.trim();
-  const isMaster = (pass === MASTER);
-
-  // ▶ 수정
-  if (btn.dataset.action === 'edit') {
-    const current = all[idx];
-    const next = prompt('수정할 내용을 입력해주세요.', current.msg);
-    if (next === null) return;          // 취소
-    const trimmed = next.trim();
-    if (!trimmed) {
-      alert('내용이 비어 있습니다.');
+  on(vBtn,'click', async ()=>{
+    const n = vName.value.trim();
+    const p = vPass.value.trim();
+    if(!p){
+      alert('비밀번호를 입력해주세요.');
       return;
     }
-    all[idx].msg = trimmed;
-    all[idx].at  = new Date().toISOString();
-    save(all);
-  }
+    try {
+      const result = await callApi('list', { name: n, pass: p });
+      if (!result.ok) {
+        alert('조회 중 오류가 발생했어요: ' + (result.error || ''));
+        return;
+      }
+      render(result.items || []);
+    } catch (e) {
+      alert('서버와 통신에 실패했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  });
 
-  // ▶ 삭제
-  if (btn.dataset.action === 'delete') {
-    if (!confirm('정말 삭제하시겠습니까?')) return;
-    all.splice(idx, 1);
-    save(all);
-  }
-
-  // ▶ 다시 현재 조건(name + pass)으로 필터해서 렌더링
-  let result = [];
-  if (isMaster) {
-    result = all;   // 마스터 비밀번호면 전체
-  } else {
-    result = all.filter(it => it.pass === pass && it.name === name);
-  }
-  render(result);
-});
-
-  
 })();
 </script>
-<script>
+
+  <script>
 (function weddingGrid(){
   const grid    = document.getElementById('wg-grid');
   const lb      = document.getElementById('wg-lightbox');

@@ -907,6 +907,7 @@ border:1px solid var(--theme); background:#fff; color:var(--theme);
 font-weight:700; border-radius:10px; padding:.55rem 1.1rem; cursor:pointer;
 }
 body.modal-open{ overflow:hidden; } /* 모달 열릴 때 스크롤 잠금 */
+  
 /* ===== 방명록(GUESTBOOK) ===== */
 :root{
 --theme:#729C70;         /* main green */
@@ -973,43 +974,8 @@ font-weight:800; background:var(--theme); color:#fff; cursor:pointer;
 }
 .gb-submit:disabled{ background:#e9ecef; color:#9aa0a6; cursor:not-allowed; }
 
-/* 조회 리스트 */
-.gb-list{ margin-top:.6rem; text-align:left; max-height:46vh; overflow:auto;
-border:1px solid var(--border); border-radius:12px; }
-.gb-item{ padding:.8rem .9rem; border-bottom:1px solid var(--border); }
-.gb-item:last-child{ border-bottom:0; }
-.gb-item .meta{ font-size:.85rem; color:#6b7b88; display:flex; gap:.5rem; flex-wrap:wrap; }
-.gb-item .msg{ margin-top:.35rem; white-space:pre-wrap; color:#2b2b2b; line-height:1.6; }
 
-/* 개별 항목 하단 수정/삭제 버튼 */
-.gb-item-actions{
-  margin-top:.4rem;
-  display:flex;
-  gap:.4rem;
-  justify-content:flex-end;
-}
 
-.gb-item-actions button{
-  border:0;
-  background:#f1f3f5;
-  color:#555;
-  border-radius:999px;
-  padding:.2rem .6rem;
-  font-size:.8rem;
-  cursor:pointer;
-}
-
-.gb-item-actions button:hover{
-  background:#e0e4e8;
-}
-
-.gb-item-actions .gb-delete{
-  color:#c92a2a;
-}
-
-.gb-item-actions .gb-delete:hover{
-  background:#ffe3e3;
-}
   
 /* 하단 감사문구 */
 .gb-thanks{  font-size: 0.95rem;
@@ -1973,12 +1939,8 @@ Q3. 상대의 귀여운 습관은?<br>
 </p>
 
 <div class="gb-actions">
-  <button id="gb-open-write" class="gb-btn">
+<button id="gb-open-write" class="gb-btn secondary">
     ❤️ 축하메세지 보내기
-  </button>
-
-  <button id="gb-open-view" class="gb-btn secondary">
-    ❤️ 메세지 확인하기
   </button>
 </div>
 
@@ -2018,32 +1980,6 @@ Q3. 상대의 귀여운 습관은?<br>
 </div>
 </div>
 
-<!-- 🔎 조회 모달 -->
-<div id="gb-modal-view" class="gb-modal" aria-hidden="true" role="dialog" aria-labelledby="gbViewTitle">
-<div class="panel" role="document">
-<div class="panel-head">
-<div class="panel-title" id="gbViewTitle">메세지 확인하기</div>
-<button class="panel-close" data-close="gb-modal-view" aria-label="닫기">×</button>
-</div>
-<div class="panel-body">
-<div class="gbi">
-<div>
-<div class="label">이름</div>
-<input id="gb-view-name" class="input" type="text" placeholder="이름" maxlength="20">
-</div>
-<div>
-<div class="label">비밀번호</div>
-<input id="gb-view-pass" class="input" type="password" placeholder="필수" maxlength="20" required>
-</div>
-</div>
-
-<div id="gb-results" class="gb-list" aria-live="polite" aria-busy="false" style="display:none;"></div>
-</div>
-<div class="panel-foot">
-<button id="gb-search" class="gb-submit">조회하기</button>
-</div>
-</div>
-</div>
 
 
 </main>
@@ -2253,7 +2189,6 @@ async function callApi(action, payload) {
 
   // ---------- Open buttons ----------
   on($('#gb-open-write'), 'click', ()=> openModal('gb-modal-write'));
-  on($('#gb-open-view'), 'click', ()=> openModal('gb-modal-view'));
 
   // ---------- Writer form ----------
   const nameEl = $('#gb-name');
@@ -2297,61 +2232,6 @@ async function callApi(action, payload) {
       sendEl.disabled = true;
       closeModal('gb-modal-write');
       alert('메시지가 저장되었습니다. 감사합니다!');
-    } catch (e) {
-      alert('서버와 통신에 실패했습니다. 잠시 후 다시 시도해주세요.');
-    }
-  });
-
-  // ---------- Viewer ----------
-  const vName = $('#gb-view-name');
-  const vPass = $('#gb-view-pass');
-  const vBtn  = $('#gb-search');
-  const vList = $('#gb-results');
-
-  function escapeHtml(s){
-    return s.replace(/[&<>"']/g, m => (
-      {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]
-    ));
-  }
-
-  function render(list){
-    if(!list || list.length===0){
-      vList.style.display='block';
-      vList.innerHTML = '<div class="gb-item"><div class="msg">조회 결과가 없습니다.</div></div>';
-      return;
-    }
-    const html = list.map(it=>{
-      const d = new Date(it.at);
-      const time =
-        `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ` +
-        `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-      return `
-        <div class="gb-item">
-          <div class="meta">
-            <strong>${escapeHtml(it.name)}</strong>
-            <span>${time}</span>
-          </div>
-          <div class="msg">${escapeHtml(it.msg)}</div>
-        </div>`;
-    }).join('');
-    vList.innerHTML = html;
-    vList.style.display='block';
-  }
-
-  on(vBtn,'click', async ()=>{
-    const n = vName.value.trim();
-    const p = vPass.value.trim();
-    if(!p){
-      alert('비밀번호를 입력해주세요.');
-      return;
-    }
-    try {
-      const result = await callApi('list', { name: n, pass: p });
-      if (!result.ok) {
-        alert('조회 중 오류가 발생했어요: ' + (result.error || ''));
-        return;
-      }
-      render(result.items || []);
     } catch (e) {
       alert('서버와 통신에 실패했습니다. 잠시 후 다시 시도해주세요.');
     }

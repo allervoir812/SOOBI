@@ -760,11 +760,13 @@ margin-top: 8rem !important;   /* ⬅️ 위쪽 여백 충분히 확보 */
 }
 
 /* 캡션(남은 일수 문장) */
-.count-caption{
-  margin-top:0.9rem;
-  font-size:0.98rem;
-  color:#555;
+.count-caption {
+  margin-top: 1.4rem;
+  font-size: 1rem;
+  color: #555;
+  font-weight: 400;
 }
+
 
 .count-sep{ /* 왼쪽 여백용(디자인 균형) */
 width:0.6rem; height:1px; display:inline-block;
@@ -2109,37 +2111,50 @@ items.forEach(el=>io.observe(el));
 </script>
 <script>
 (function countdown(){
-const target = new Date(2026, 1, 8, 11, 30, 0); // 2026-02-08 11:30
+  const target = new Date(2026, 1, 8, 11, 30, 0); // 2026-02-08 11:30
+  
+  const el = document.getElementById('wedding-countdown');
+  const caption = document.createElement('p');
+  caption.className = 'count-caption';
+  el.parentNode.insertBefore(caption, el.nextSibling);
 
-const el = document.getElementById('wedding-countdown');
-if (!el) return;
-const $ = sel => el.querySelector(sel);
-const set = (unit, v) => el.querySelector(`.value[data-unit="${unit}"]`).textContent = v;
+  function pad(n){ return String(n).padStart(2,'0'); }
 
-function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    const now = new Date();
+    let diff = target - now;
+    const sec = Math.floor(diff/1000);
+    const days = Math.floor(sec / 86400);
 
-function tick(){
-const now = new Date();
-let diff = target - now;
-if (diff <= 0){
-set('days','00'); set('hours','00'); set('mins','00'); set('secs','00');
-$('[data-caption]').textContent = '오늘입니다';
-return;
-}
-const sec = Math.floor(diff/1000);
-const days = Math.floor(sec / 86400);
-const hours = Math.floor((sec % 86400) / 3600);
-const mins = Math.floor((sec % 3600) / 60);
-const secs = sec % 60;
+    const hearts = '성수♥한비 ';
 
-set('days', days);
-set('hours', pad(hours));
-set('mins', pad(mins));
-set('secs', pad(secs));
-}
-tick();
-setInterval(tick, 1000);
+    // ===== 문구 분기 =====
+    if (days > 0) {
+      caption.textContent = `${hearts}결혼식이 ${days}일 남았습니다.`;
+    } 
+    else if (days === 0) {
+      caption.textContent = `${hearts}결혼식이 오늘입니다!`;
+    }
+    else {
+      caption.textContent = `${hearts}결혼식이 ${Math.abs(days)}일 지났습니다.`;
+    }
+
+    // ===== 타이머 유지 =====
+    const diffAbs = Math.abs(sec);
+    const hours = Math.floor((diffAbs % 86400) / 3600);
+    const mins = Math.floor((diffAbs % 3600) / 60);
+    const secs = diffAbs % 60;
+
+    el.querySelector('[data-unit="days"]').textContent  = Math.max(0, days);
+    el.querySelector('[data-unit="hours"]').textContent = pad(hours);
+    el.querySelector('[data-unit="mins"]').textContent  = pad(mins);
+    el.querySelector('[data-unit="secs"]').textContent  = pad(secs);
+  }
+
+  tick();
+  setInterval(tick, 1000);
 })();
+
 </script>
 
 

@@ -1474,6 +1474,10 @@ letter-spacing: 0.02em;
   transform: translateX(-50%); /* 🔥 진짜 정중앙 */
 }
 
+  .count-heart {
+  color: rgba(255, 182, 193, 0.9); /* 달력 하트 색과 비슷한 톤 */
+  font-size: 1.05em;
+}
   
 </style>
 </head>
@@ -2042,7 +2046,7 @@ items.forEach(el=>io.observe(el));
     const sec = Math.floor(diff / 1000);
     const days = Math.floor(sec / 86400);
     
-    const hearts = '성수♥한비 ';
+const hearts = '<span class="count-heart">성수♥한비 &#10084;</span> ';
 
     if (days > 0) {
       el.textContent = `${hearts}결혼식이 ${days}일 남았습니다`;

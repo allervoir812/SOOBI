@@ -2036,7 +2036,7 @@ items.forEach(el=>io.observe(el));
 </script>
 <script>
 (function simpleCountdown(){
-  const target = new Date(2026, 1, 8, 11, 30, 0); // 날짜/시간 재확인
+  const target = new Date(2026, 1, 8, 11, 30, 0);
   const el = document.getElementById('count-inline');
   if(!el) return;
 
@@ -2045,24 +2045,23 @@ items.forEach(el=>io.observe(el));
     const diff = target - now;
     const sec = Math.floor(diff / 1000);
     const days = Math.floor(sec / 86400);
-    
-const hearts = '<span class="count-heart">성수♥한비 &#10084;</span> ';
+
+    const hearts = '<span class="count-heart">성수&#10084;한비</span> ';
 
     if (days > 0) {
-      el.textContent = `${hearts}결혼식이 ${days}일 남았습니다`;
+      el.innerHTML = `${hearts}결혼식이 ${days}일 남았습니다`;
     }
     else if (days === 0) {
-      el.textContent = `${hearts}결혼식이 오늘입니다!`;
+      el.innerHTML = `${hearts}결혼식이 오늘입니다!`;
     }
     else {
-      el.textContent = `${hearts}결혼식이 ${Math.abs(days)}일 지났습니다`;
+      el.innerHTML = `${hearts}결혼식이 ${Math.abs(days)}일 지났습니다`;
     }
   }
 
   tick();
   setInterval(tick, 1000);
 })();
-
 
 </script>
 

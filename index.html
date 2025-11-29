@@ -2150,20 +2150,22 @@ setInterval(tick, 1000);
   const on = (el, ev, fn) => el && el.addEventListener(ev, fn);
 
   // ---------- API helper ----------
-async function callApi(action, payload) {
-  const res = await fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ action, ...payload })
-  });
+  async function callApi(action, payload) {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      // ⚠ CORS 막히지 않게 application/json 말고 text/plain 사용
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action, ...payload })
+    });
 
-  if (!res.ok) {
-    const text = await res.text().catch(() => '');
-    throw new Error('HTTP ' + res.status + ' ' + text);
+    if (!res.ok) {
+      const text = await res.text().catch(() => '');
+      console.error('API error:', res.status, text);
+      throw new Error('HTTP ' + res.status);
+    }
+
+    return res.json();
   }
-
-  return res.json();
-}
 
 
   // ---------- modal helpers ----------
@@ -2200,52 +2202,54 @@ async function callApi(action, payload) {
   on($('#gb-open-write'), 'click', ()=> openModal('gb-modal-write'));
 
   // ---------- Writer form ----------
+  // ---------- 작성 모달 ----------
   const nameEl = $('#gb-name');
-  const passEl = $('#gb-pass');
   const msgEl  = $('#gb-msg');
   const sendEl = $('#gb-send');
   const cntEl  = $('#gb-count');
 
-function validateWrite(){
-  const ok = (nameEl.value.trim().length>0) &&
-             (msgEl.value.trim().length>0);
-  sendEl.disabled = !ok;
-}
+  function validateWrite(){
+    const ok = (nameEl.value.trim().length > 0) &&
+               (msgEl.value.trim().length   > 0);
+    sendEl.disabled = !ok;
+  }
 
-  ['input','keyup'].forEach(ev=>{
+  ['input','keyup'].forEach(ev => {
     on(nameEl, ev, validateWrite);
-    on(passEl, ev, validateWrite);
-    on(msgEl , ev, (e)=>{
+    on(msgEl,  ev, (e) => {
       cntEl.textContent = e.target.value.length;
       validateWrite();
     });
   });
- on(sendEl,'click', async ()=>{
-  const name = nameEl.value.trim();
-  const msg  = msgEl.value.trim();
-  const pass = '0000'; // 자동 기본 비번 (사용자 숨김)
 
-  if(!name || !msg) return;
+  on(sendEl,'click', async ()=>{
+    const name = nameEl.value.trim();
+    const msg  = msgEl.value.trim();
+    const pass = '0000';   // 👉 화면엔 안 보이지만 내부로는 기본 비번 고정
 
+    if (!name || !msg) return;
 
     try {
       const result = await callApi('add', { name, pass, msg });
+
       if (!result.ok) {
         alert('저장 중 오류가 발생했어요: ' + (result.error || ''));
         return;
       }
 
+      // 성공 시 초기화
       nameEl.value = '';
-      passEl.value = '';
       msgEl.value  = '';
       cntEl.textContent = '0';
       sendEl.disabled = true;
       closeModal('gb-modal-write');
       alert('메시지가 저장되었습니다. 감사합니다!');
     } catch (e) {
+      console.error(e);
       alert('서버와 통신에 실패했습니다. 잠시 후 다시 시도해주세요.');
     }
   });
+
 
 })();
 </script>

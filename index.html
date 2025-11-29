@@ -2209,12 +2209,12 @@ async function callApi(action, payload) {
   const sendEl = $('#gb-send');
   const cntEl  = $('#gb-count');
 
-  function validateWrite(){
-    const ok = (nameEl.value.trim().length>0) &&
-               (passEl.value.trim().length>0) &&
-               (msgEl.value.trim().length>0);
-    sendEl.disabled = !ok;
-  }
+function validateWrite(){
+  const ok = (nameEl.value.trim().length>0) &&
+             (msgEl.value.trim().length>0);
+  sendEl.disabled = !ok;
+}
+
   ['input','keyup'].forEach(ev=>{
     on(nameEl, ev, validateWrite);
     on(passEl, ev, validateWrite);
@@ -2223,12 +2223,13 @@ async function callApi(action, payload) {
       validateWrite();
     });
   });
+ on(sendEl,'click', async ()=>{
+  const name = nameEl.value.trim();
+  const msg  = msgEl.value.trim();
+  const pass = '0000'; // 자동 기본 비번 (사용자 숨김)
 
-  on(sendEl,'click', async ()=>{
-    const name = nameEl.value.trim();
-    const pass = passEl.value.trim();
-    const msg  = msgEl.value.trim();
-    if(!name || !pass || !msg) return;
+  if(!name || !msg) return;
+
 
     try {
       const result = await callApi('add', { name, pass, msg });

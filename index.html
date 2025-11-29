@@ -1506,15 +1506,18 @@ letter-spacing: 0.02em;
   font-size: 0.9rem;
   line-height: 1.6;
 }
-  .flower-notice {
-  font-size: 0.95rem;
+.flower-notice {
+  font-size: 0.7rem;
   color: #888;
-  margin-top: 0px;
-  margin-bottom: 8px;
-
+  margin-top: 10px;
   text-align: center;
-  white-space: nowrap; /* 🔥 줄바꿈 방지 */
-  line-height: 1.3;
+  white-space: nowrap; /* 줄바꿈 방지 */
+
+  display: block;
+  width: 100vw; /* 🔥 화면 전체 기준으로 가운데 정렬 */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); /* 🔥 진짜 정중앙 */
 }
 
 </style>

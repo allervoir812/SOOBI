@@ -2205,14 +2205,21 @@ setInterval(tick, 1000);
   const on = (el, ev, fn) => el && el.addEventListener(ev, fn);
 
   // ---------- API helper ----------
-  async function callApi(action, payload) {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action, ...payload })
-    });
-    return res.json();
+async function callApi(action, payload) {
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action, ...payload })
+  });
+
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new Error('HTTP ' + res.status + ' ' + text);
   }
+
+  return res.json();
+}
+
 
   // ---------- modal helpers ----------
   function openModal(id){

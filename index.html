@@ -711,53 +711,7 @@ margin-top: 8rem !important;   /* ⬅️ 위쪽 여백 충분히 확보 */
   transform: translateY(-1px);
 }
 
-/* ===== Countdown (달력 하단 스톱워치 스타일) ===== */
-.countdown{
-  max-width:820px;
-  margin:2.2rem auto 3rem;   /* 위/아래 간격 확보 (지도와 여유 있게) */
-  text-align:center;
-  padding:0 1rem;
-}
 
-/* 타이머 전체 글자: 회색 + 얇게 */
-.countdown,
-.countdown * {
-  font-weight: 400;
-  color: #555;
-}
-
-.count-row{
-  display:flex;
-  justify-content:center;
-  align-items:flex-end;
-  gap:2.4rem;
-  font-family:'Lato', sans-serif;
-}
-
-.count-block label{
-  display:block;
-  font-size:0.85rem;
-  letter-spacing:0.28em;   /* 살짝 넓은 자간 */
-}
-
-.count-block .value{
-  margin-top:0.35rem;
-  font-size:1.7rem;
-  font-weight:400;         /* 숫자도 얇게 */
-  line-height:1;
-}
-
-.count-sep{
-  width:0.6rem;
-  height:1px;
-  display:inline-block;
-}
-
-.colon{
-  font-size:1.2rem;
-  align-self:center;
-  margin:0 -0.2rem;
-}
 
 /* 캡션(남은 일수 문장) */
 .count-caption {
@@ -1520,6 +1474,16 @@ letter-spacing: 0.02em;
   transform: translateX(-50%); /* 🔥 진짜 정중앙 */
 }
 
+#count-inline {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: #555;
+  text-align: center;
+  letter-spacing: 1px;
+  margin: 1.5rem auto 0;
+}
+  
 </style>
 </head>
 
@@ -1659,35 +1623,7 @@ Q3. 상대의 귀여운 습관은?<br>
 </div>
 
   <!-- 실제 카운트다운 타이머 -->
-  <div class="countdown" id="wedding-countdown" aria-label="예식까지 남은 시간">
-    <div class="count-row">
-      <div class="count-block">
-        <label>DAYS</label>
-        <div class="value" data-unit="days">00</div>
-      </div>
-
-      <span class="count-sep"> </span>
-
-      <div class="count-block">
-        <label>HOUR</label>
-        <div class="value" data-unit="hours">00</div>
-      </div>
-
-      <span class="colon">:</span>
-
-      <div class="count-block">
-        <label>MIN</label>
-        <div class="value" data-unit="mins">00</div>
-      </div>
-
-      <span class="colon">:</span>
-
-      <div class="count-block">
-        <label>SEC</label>
-        <div class="value" data-unit="secs">00</div>
-      </div>
-    </div>
-  </div>
+ <p id="count-inline" class="count-caption"></p>
 
   <!-- 아래 문구 -->
   <p class="count-phrase-bottom">남았습니다</p>
@@ -2113,50 +2049,34 @@ items.forEach(el=>io.observe(el));
 })();
 </script>
 <script>
-(function countdown(){
-  const target = new Date(2026, 1, 8, 11, 30, 0); // 2026-02-08 11:30
-  
-  const el = document.getElementById('wedding-countdown');
-  const caption = document.createElement('p');
-  caption.className = 'count-caption';
-  el.parentNode.insertBefore(caption, el.nextSibling);
-
-  function pad(n){ return String(n).padStart(2,'0'); }
+(function simpleCountdown(){
+  const target = new Date(2026, 1, 8, 11, 30, 0); // 날짜/시간 재확인
+  const el = document.getElementById('count-inline');
+  if(!el) return;
 
   function tick(){
     const now = new Date();
-    let diff = target - now;
-    const sec = Math.floor(diff/1000);
+    const diff = target - now;
+    const sec = Math.floor(diff / 1000);
     const days = Math.floor(sec / 86400);
-
+    
     const hearts = '성수♥한비 ';
 
-    // ===== 문구 분기 =====
     if (days > 0) {
-      caption.textContent = `${hearts}결혼식이 ${days}일 남았습니다.`;
-    } 
+      el.textContent = `${hearts}결혼식이 ${days}일 남았습니다`;
+    }
     else if (days === 0) {
-      caption.textContent = `${hearts}결혼식이 오늘입니다!`;
+      el.textContent = `${hearts}결혼식이 오늘입니다!`;
     }
     else {
-      caption.textContent = `${hearts}결혼식이 ${Math.abs(days)}일 지났습니다.`;
+      el.textContent = `${hearts}결혼식이 ${Math.abs(days)}일 지났습니다`;
     }
-
-    // ===== 타이머 유지 =====
-    const diffAbs = Math.abs(sec);
-    const hours = Math.floor((diffAbs % 86400) / 3600);
-    const mins = Math.floor((diffAbs % 3600) / 60);
-    const secs = diffAbs % 60;
-
-    el.querySelector('[data-unit="days"]').textContent  = Math.max(0, days);
-    el.querySelector('[data-unit="hours"]').textContent = pad(hours);
-    el.querySelector('[data-unit="mins"]').textContent  = pad(mins);
-    el.querySelector('[data-unit="secs"]').textContent  = pad(secs);
   }
 
   tick();
   setInterval(tick, 1000);
 })();
+
 
 </script>
 

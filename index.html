@@ -1474,9 +1474,27 @@ letter-spacing: 0.02em;
   transform: translateX(-50%); /* 🔥 진짜 정중앙 */
 }
 
-  .count-heart {
-  color: rgba(255, 182, 193, 0.9); /* 달력 하트 색과 비슷한 톤 */
-  font-size: 1.05em;
+/* 카운트다운 문장 안 이름 + 하트 전체 컨테이너 */
+.count-heart {
+  font-family: inherit;   /* 뒤 문장과 같은 폰트 */
+  font-weight: inherit;   /* 뒤 문장과 같은 두께 */
+  color: inherit;         /* 뒤 문장과 같은 색 */
+}
+
+/* 이름 텍스트는 그냥 문장 스타일 그대로 사용 */
+.count-name {
+  font-family: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+/* 가운데 하트만 달력 하트처럼 연핑크로 */
+.count-heart-icon {
+  display: inline-block;
+  margin: 0 0.2em;
+  font-size: 1.2em;
+  color: rgba(255, 182, 193, 0.5);  /* 달력 d8 하트랑 같은 느낌 */
+  transform: translateY(1px);       /* 살짝 아래로 내려서 예쁘게 */
 }
   
 </style>
@@ -2036,33 +2054,40 @@ items.forEach(el=>io.observe(el));
 </script>
 <script>
 (function simpleCountdown(){
-  const target = new Date(2026, 1, 8, 11, 30, 0);
   const el = document.getElementById('count-inline');
-  if(!el) return;
+  if (!el) return;
 
-  function tick(){
+  function tick() {
     const now = new Date();
-    const diff = target - now;
-    const sec = Math.floor(diff / 1000);
-    const days = Math.floor(sec / 86400);
 
-    const hearts = '<span class="count-heart">성수&#10084;한비</span> ';
+    // 오늘 0시 기준 날짜
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    // 2026년 2월 8일 0시 기준 날짜 (월은 0부터라 1=2월)
+    const target = new Date(2026, 1, 8);
+
+    // 남은 일 수 계산 (위젯이랑 같은 로직)
+    const diffTime = target - today;
+    const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    const hearts = ''
+      + '<span class="count-heart">'
+      +   '<span class="count-name">성수</span>'
+      +   '<span class="count-heart-icon">♥</span>'
+      +   '<span class="count-name">한비</span>'
+      + '</span> ';
 
     if (days > 0) {
       el.innerHTML = `${hearts}결혼식이 ${days}일 남았습니다`;
-    }
-    else if (days === 0) {
+    } else if (days === 0) {
       el.innerHTML = `${hearts}결혼식이 오늘입니다!`;
-    }
-    else {
+    } else {
       el.innerHTML = `${hearts}결혼식이 ${Math.abs(days)}일 지났습니다`;
     }
   }
 
   tick();
-  setInterval(tick, 1000);
+  setInterval(tick, 1000); // 초마다 업데이트 (원래대로 유지)
 })();
-
 </script>
 
 

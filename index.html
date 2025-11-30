@@ -2415,42 +2415,48 @@ document.addEventListener('DOMContentLoaded', function () {
         integrity="sha384-qCRjXwkgcbV6Wjr7+JzhoyEDqiXGHvMVzlPax8nGIp1ZbBo8bVrGdh62mtOh9H+9"
         crossorigin="anonymous"></script>
 
-<script>
-Kakao.init('📌여기에_카카오_JS_KEY_넣기'); // 👉 네 앱키 필수 입력!
-
-document.getElementById("kakao-share-btn").addEventListener("click", function () {
-  Kakao.Share.sendDefault({
-    objectType: 'feed',
-    content: {
-      title: '성수 ❤ 한비 결혼합니다',
-      description: '2026. 02. 08(일) 오전 11:30 - 아펠가모 공덕 마리에홀',
-      imageUrl: window.location.origin + '/images/34.jpg', // 공유 썸네일
-      link: {
-        mobileWebUrl: window.location.href,
-        webUrl: window.location.href,
-      }
-    },
-    social: {
-      likeCount: 2026 // 컨셉으로 예쁘게
-    },
-    buttons: [
-      {
-        title: '모바일 청첩장 보기',
-        link: {
-          mobileWebUrl: window.location.href,
-          webUrl: window.location.href,
-        }
-      }
-    ]
-  });
-});
-</script>
-
-  
-<!-- 📤 카카오톡 공유 버튼 -->
+<!-- 📤 카카오톡 공유 버튼 (위로 올리기!) -->
 <div class="kakao-share-wrap">
   <button id="kakao-share-btn">카카오톡으로 청첩장 전달하기 💛</button>
 </div>
+
+<!-- Kakao SDK -->
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+        integrity="sha384-qCRjXwkgcbV6Wjr7+JzhoyEDqiXGHvMVzlPax8nGIp1ZbBo8bVrGdh62mtOh9H+9"
+        crossorigin="anonymous"></script>
+
+<script>
+  // ✅ 여기엔 실제 카카오 자바스크립트 키 넣기!!
+  Kakao.init('여기에_실제_카카오_JS_키_입력');
+
+  const shareBtn = document.getElementById("kakao-share-btn");
+
+  if (shareBtn) {
+    shareBtn.addEventListener("click", function () {
+      Kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '성수 ❤ 한비 결혼합니다',
+          description: '2026. 02. 08(일) 오전 11:30 - 아펠가모 공덕 마리에홀',
+          imageUrl: window.location.origin + '/images/34.jpg',
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          }
+        },
+        buttons: [
+          {
+            title: '모바일 청첩장 보기',
+            link: {
+              mobileWebUrl: window.location.href,
+              webUrl: window.location.href,
+            }
+          }
+        ]
+      });
+    });
+  }
+</script>
 
 </body>
 </html>

@@ -2011,6 +2011,42 @@ Q3. 상대의 귀여운 습관은?<br>
 </div>
 
 <script>
+
+  <script>
+  // ✅ 여기에는 실제 JavaScript 키 넣기!! (노출되니까 GitHub public이면 큰 서비스엔 X, 청첩장은 거의 문제 없음)
+  Kakao.init('여기에_실제_카카오_JS_키_입력');
+
+  console.log('Kakao SDK initialized?', Kakao.isInitialized()); // 개발용 체크
+
+  const shareBtn = document.getElementById("kakao-share-btn");
+
+  if (shareBtn) {
+    shareBtn.addEventListener("click", function () {
+      Kakao.Share.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: '성수 ❤ 한비 결혼합니다',
+          description: '2026. 02. 08(일) 오전 11:30 · 아펠가모 공덕 마리에홀',
+          imageUrl: 'https://너도메인.com/images/34.jpg',  // ✅ 절대경로!
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          }
+        },
+        buttons: [
+          {
+            title: '모바일 청첩장 보기',
+            link: {
+              mobileWebUrl: window.location.href,
+              webUrl: window.location.href,
+            }
+          }
+        ]
+      });
+    });
+  }
+</script>
+
 function updateDday() {
 const targetDate = new Date('2026-02-08T00:00:00');
 const today = new Date();

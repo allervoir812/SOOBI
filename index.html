@@ -1596,8 +1596,6 @@ letter-spacing: 0.02em;
     </div>
   </div>
 
-
-
 </section>
 
   <!-- 카드 플립 구조 -->
@@ -1857,7 +1855,7 @@ Q3. 상대의 귀여운 습관은?<br>
         </div>
         <button type="button"
                 class="acc-copy"
-                data-account="우라은행 1002-737-122551">
+                data-account="우리은행 1002-737-122551">
           <span class="acc-bank">우리은행</span>
           <span class="acc-num">1002-737-122551</span>
           <span class="acc-copy-icon">복사</span>
@@ -1917,9 +1915,6 @@ Q3. 상대의 귀여운 습관은?<br>
       </div>
     </div>
   </div>
-</section>
-  <p class="account-desc">
-
 
 <!-- ===== GUESTBOOK ===== -->
 <section id="guestbook" class="guestbook">
@@ -2007,52 +2002,38 @@ Q3. 상대의 귀여운 습관은?<br>
 
 <!-- 팝업 이미지 -->
 <div id="image-popup">
-<img id="popup-img" src="" alt="">
+  <img id="popup-img" src="" alt="">
 </div>
 
-function updateDday() {
-const targetDate = new Date('2026-02-08T00:00:00');
-const today = new Date();
-const diffTime = targetDate - today;
-const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-const ddayCount = document.getElementById('dday-count');
-if (diffDays > 0) {
-ddayCount.textContent = `D-${diffDays}`;
-} else if (diffDays === 0) {
-ddayCount.textContent = 'D-Day';
-} else {
-ddayCount.textContent = `D+${Math.abs(diffDays)}`;
-}
-}
-updateDday();
-setInterval(updateDday, 1000 * 60 * 60);
+<script>
+  // D-Day 위젯 업데이트
+  function updateDday() {
+    const targetDate = new Date('2026-02-08T00:00:00');
+    const today = new Date();
+    const diffTime = targetDate - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const ddayCount = document.getElementById('dday-count');
 
-// flip 카드 클릭 toggle
-document.querySelectorAll('.flip-card').forEach(card => { 
-card.addEventListener('click', () => { 
-card.classList.toggle('flipped'); 
-}); 
-});
+    if (!ddayCount) return;
 
-// 이미지 클릭 시 팝업 띄우기
-document.querySelectorAll('.gallery a').forEach(link => {
-link.addEventListener('click', e => {
-e.preventDefault();
-const imgSrc = link.querySelector('img').src;
-document.getElementById('popup-img').src = imgSrc;
-document.getElementById('image-popup').classList.add('show');
-document.getElementById('image-popup-overlay').classList.add('show');
-});
-});
+    if (diffDays > 0) {
+      ddayCount.textContent = `D-${diffDays}`;
+    } else if (diffDays === 0) {
+      ddayCount.textContent = 'D-Day';
+    } else {
+      ddayCount.textContent = `D+${Math.abs(diffDays)}`;
+    }
+  }
 
-// 오버레이나 이미지 클릭 시 팝업 닫기
-const closePopup = () => {
-document.getElementById('image-popup').classList.remove('show');
-document.getElementById('image-popup-overlay').classList.remove('show');
-};
-document.getElementById('image-popup-overlay').addEventListener('click', closePopup);
-document.getElementById('popup-img').addEventListener('click', closePopup);
-</script>
+  // DOM이 다 준비된 후에 실행 (안전빵)
+  document.addEventListener('DOMContentLoaded', () => {
+    updateDday();
+    // 시간 지나도 값이 바뀌게 유지하고 싶으면 그대로 두기
+    setInterval(updateDday, 1000 * 60 * 60);
+
+    // flip 카드 클릭 toggle
+    doc
+
 
 <!-- ✅ 카카오 퍼가기: 공식 스니펫(가장 안전한 방식) -->
 <script charset="UTF-8" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>

@@ -1000,16 +1000,6 @@ margin-bottom: 1.8rem; /* ✅ 아래 사진과 간격 넓힘 */
 }
 
 /* 라이트박스(확대 보기) */
-#wg-lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, .85);
-  z-index: 12000;
-  display: none;           /* 기본은 숨김 */
-  align-items: center;
-  justify-content: center;
-}
-
 #wg-lightbox.show {
   display: flex;           /* 열렸을 때만 보이게 */
 }
@@ -1536,7 +1526,7 @@ letter-spacing: 0.02em;
   padding-bottom: 2.5rem;
   text-align: center;
   font-size: 0.95rem;
-  font-weight: 300
+  font-weight: 300;
   color: #888;
   line-height: 1.7;
 }
@@ -1604,9 +1594,7 @@ letter-spacing: 0.02em;
       <div class="location_detail2">(사진을 클릭해보세요!)</div>
     </div>
   </div>
-
-
-
+</header>
 </section>
 
   <!-- 카드 플립 구조 -->
@@ -1776,7 +1764,6 @@ letter-spacing: 0.02em;
 <div class="kor">우리의 소중한 순간들</div>
 <div class="eng">OUR PRECIOUS MOMENTS</div>
 </div>
-</header>
 
 <main><!-- ⭐️ 우리의 소중한 순간들 - 웨딩 갤러리 -->
 <section class="wg" id="wedding-gallery">
@@ -2069,16 +2056,7 @@ card.classList.toggle('flipped');
 }); 
 });
 
-// 이미지 클릭 시 팝업 띄우기
-document.querySelectorAll('.gallery a').forEach(link => {
-link.addEventListener('click', e => {
-e.preventDefault();
-const imgSrc = link.querySelector('img').src;
-document.getElementById('popup-img').src = imgSrc;
-document.getElementById('image-popup').classList.add('show');
-document.getElementById('image-popup-overlay').classList.add('show');
-});
-});
+
 
 // 오버레이나 이미지 클릭 시 팝업 닫기
 const closePopup = () => {

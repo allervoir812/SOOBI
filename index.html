@@ -888,19 +888,11 @@ body.modal-open{ overflow:hidden; } /* 모달 열릴 때 스크롤 잠금 */
 }
 .gb-actions{ display:flex; justify-content:center; gap:.6rem; flex-wrap:wrap; }
 .gb-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:.45rem;
-  cursor:pointer;
-  border:0;
-  border-radius:999px;
-  padding:.75rem 1.15rem;
-  font-weight:700;
-  font-size:0.85rem;   /* ✅ 추가 */
-  color:#fff;
-  background:var(--theme);
-  box-shadow:0 6px 14px rgba(0,0,0,.08);
+display:inline-flex; align-items:center; gap:.45rem; cursor:pointer; border:0;
+border-radius:999px; padding:.75rem 1.15rem; font-weight:700; color:#fff;
+background:var(--theme); box-shadow:0 6px 14px rgba(0,0,0,.08);
 }
+.gb-btn.secondary{ background:var(--theme-soft); }
 
 /* 모달 공통 */
 .gb-modal{ position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:11000;
@@ -1513,26 +1505,6 @@ letter-spacing: 0.02em;
 .flip-card {
   margin-top: 0.5rem; /* 카드 위쪽 여백도 소폭 줄임 */
 }
-.kakao-share-wrap {
-  text-align: center;
-  margin: 3rem 0 5rem;
-}
-
-#kakao-share-btn {
-  background: #FFFBE5;
-  color: #777;
-  border: none;
-  border-radius: 999px;
-  padding: 0.85rem 1.5rem;
-  font-size: 0.85rem;  /* ✅ 축하메세지 버튼과 통일 */
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-#kakao-share-btn:active {
-  transform: translateY(1px);
-}
 
   
 </style>
@@ -1595,6 +1567,8 @@ letter-spacing: 0.02em;
       <div class="location_detail2">(사진을 클릭해보세요!)</div>
     </div>
   </div>
+
+
 
 </section>
 
@@ -1855,7 +1829,7 @@ Q3. 상대의 귀여운 습관은?<br>
         </div>
         <button type="button"
                 class="acc-copy"
-                data-account="우리은행 1002-737-122551">
+                data-account="우라은행 1002-737-122551">
           <span class="acc-bank">우리은행</span>
           <span class="acc-num">1002-737-122551</span>
           <span class="acc-copy-icon">복사</span>
@@ -1915,6 +1889,9 @@ Q3. 상대의 귀여운 습관은?<br>
       </div>
     </div>
   </div>
+</section>
+  <p class="account-desc">
+
 
 <!-- ===== GUESTBOOK ===== -->
 <section id="guestbook" class="guestbook">
@@ -2002,38 +1979,53 @@ Q3. 상대의 귀여운 습관은?<br>
 
 <!-- 팝업 이미지 -->
 <div id="image-popup">
-  <img id="popup-img" src="" alt="">
+<img id="popup-img" src="" alt="">
 </div>
 
 <script>
-  // D-Day 위젯 업데이트
-  function updateDday() {
-    const targetDate = new Date('2026-02-08T00:00:00');
-    const today = new Date();
-    const diffTime = targetDate - today;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    const ddayCount = document.getElementById('dday-count');
+function updateDday() {
+const targetDate = new Date('2026-02-08T00:00:00');
+const today = new Date();
+const diffTime = targetDate - today;
+const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+const ddayCount = document.getElementById('dday-count');
+if (diffDays > 0) {
+ddayCount.textContent = `D-${diffDays}`;
+} else if (diffDays === 0) {
+ddayCount.textContent = 'D-Day';
+} else {
+ddayCount.textContent = `D+${Math.abs(diffDays)}`;
+}
+}
+updateDday();
+setInterval(updateDday, 1000 * 60 * 60);
 
-    if (!ddayCount) return;
+// flip 카드 클릭 toggle
+document.querySelectorAll('.flip-card').forEach(card => { 
+card.addEventListener('click', () => { 
+card.classList.toggle('flipped'); 
+}); 
+});
 
-    if (diffDays > 0) {
-      ddayCount.textContent = `D-${diffDays}`;
-    } else if (diffDays === 0) {
-      ddayCount.textContent = 'D-Day';
-    } else {
-      ddayCount.textContent = `D+${Math.abs(diffDays)}`;
-    }
-  }
+// 이미지 클릭 시 팝업 띄우기
+document.querySelectorAll('.gallery a').forEach(link => {
+link.addEventListener('click', e => {
+e.preventDefault();
+const imgSrc = link.querySelector('img').src;
+document.getElementById('popup-img').src = imgSrc;
+document.getElementById('image-popup').classList.add('show');
+document.getElementById('image-popup-overlay').classList.add('show');
+});
+});
 
-  // DOM이 다 준비된 후에 실행 (안전빵)
-  document.addEventListener('DOMContentLoaded', () => {
-    updateDday();
-    // 시간 지나도 값이 바뀌게 유지하고 싶으면 그대로 두기
-    setInterval(updateDday, 1000 * 60 * 60);
-
-    // flip 카드 클릭 toggle
-    doc
-
+// 오버레이나 이미지 클릭 시 팝업 닫기
+const closePopup = () => {
+document.getElementById('image-popup').classList.remove('show');
+document.getElementById('image-popup-overlay').classList.remove('show');
+};
+document.getElementById('image-popup-overlay').addEventListener('click', closePopup);
+document.getElementById('popup-img').addEventListener('click', closePopup);
+</script>
 
 <!-- ✅ 카카오 퍼가기: 공식 스니펫(가장 안전한 방식) -->
 <script charset="UTF-8" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
@@ -2398,51 +2390,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
-<!-- 📤 카카오톡 공유 버튼 -->
-<div class="kakao-share-wrap">
-  <button id="kakao-share-btn">카카오톡으로 청첩장 전달하기 💛</button>
-</div>
 
-<!-- Kakao SDK (한 번만 로드) -->
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
-        integrity="sha384-qCRjXwkgcbV6Wjr7+JzhoyEDqiXGHvMVzlPax8nGIp1ZbBo8bVrGdh62mtOh9H+9"
-        crossorigin="anonymous"></script>
-
-<script>
-  // ✅ 카카오 개발자 콘솔에서 받은 JavaScript 키로 꼭 바꾸기!
-  Kakao.init('92d4daf38adf7ab609c221c465e1745c');
-
-  console.log('Kakao SDK initialized?', Kakao.isInitialized()); // 개발용 확인
-
-  const shareBtn = document.getElementById("kakao-share-btn");
-
-  if (shareBtn) {
-    shareBtn.addEventListener("click", function () {
-      Kakao.Share.sendDefault({
-        objectType: 'feed',
-        content: {
-          title: '성수 ❤ 한비 결혼합니다',
-          description: '2026. 02. 08(일) 오전 11:30 - 아펠가모 공덕 마리에홀',
-          imageUrl: window.location.origin + '/images/34.jpg',
-          link: {
-            mobileWebUrl: window.location.href,
-            webUrl: window.location.href,
-          }
-        },
-        buttons: [
-          {
-            title: '모바일 청첩장 보기',
-            link: {
-              mobileWebUrl: window.location.href,
-              webUrl: window.location.href,
-            }
-          }
-        ]
-      });
-    });
-  }
-</script>
-
-
+  
 </body>
 </html>

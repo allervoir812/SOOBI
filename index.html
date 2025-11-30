@@ -888,11 +888,19 @@ body.modal-open{ overflow:hidden; } /* 모달 열릴 때 스크롤 잠금 */
 }
 .gb-actions{ display:flex; justify-content:center; gap:.6rem; flex-wrap:wrap; }
 .gb-btn{
-display:inline-flex; align-items:center; gap:.45rem; cursor:pointer; border:0;
-border-radius:999px; padding:.75rem 1.15rem; font-weight:700; color:#fff;
-background:var(--theme); box-shadow:0 6px 14px rgba(0,0,0,.08);
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  cursor:pointer;
+  border:0;
+  border-radius:999px;
+  padding:.75rem 1.15rem;
+  font-weight:700;
+  font-size:0.85rem;   /* ✅ 추가 */
+  color:#fff;
+  background:var(--theme);
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
 }
-.gb-btn.secondary{ background:var(--theme-soft); }
 
 /* 모달 공통 */
 .gb-modal{ position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:11000;
@@ -1511,12 +1519,12 @@ letter-spacing: 0.02em;
 }
 
 #kakao-share-btn {
-  background: #FFFBE5; /* 훨씬 연한 노랑톤 */
-  color: #777;         /* "함께 해주시는 마음" 과 같은 진한 회색 */
+  background: #FFFBE5;
+  color: #777;
   border: none;
   border-radius: 999px;
   padding: 0.85rem 1.5rem;
-  font-size: 1rem;
+  font-size: 0.85rem;  /* ✅ 축하메세지 버튼과 통일 */
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
@@ -2410,24 +2418,21 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
-<!-- Kakao SDK -->
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
-        integrity="sha384-qCRjXwkgcbV6Wjr7+JzhoyEDqiXGHvMVzlPax8nGIp1ZbBo8bVrGdh62mtOh9H+9"
-        crossorigin="anonymous"></script>
-
-<!-- 📤 카카오톡 공유 버튼 (위로 올리기!) -->
+<!-- 📤 카카오톡 공유 버튼 -->
 <div class="kakao-share-wrap">
   <button id="kakao-share-btn">카카오톡으로 청첩장 전달하기 💛</button>
 </div>
 
-<!-- Kakao SDK -->
+<!-- Kakao SDK (한 번만 로드) -->
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
         integrity="sha384-qCRjXwkgcbV6Wjr7+JzhoyEDqiXGHvMVzlPax8nGIp1ZbBo8bVrGdh62mtOh9H+9"
         crossorigin="anonymous"></script>
 
 <script>
-  // ✅ 여기엔 실제 카카오 자바스크립트 키 넣기!!
+  // ✅ 카카오 개발자 콘솔에서 받은 JavaScript 키로 꼭 바꾸기!
   Kakao.init('여기에_실제_카카오_JS_키_입력');
+
+  console.log('Kakao SDK initialized?', Kakao.isInitialized()); // 개발용 확인
 
   const shareBtn = document.getElementById("kakao-share-btn");
 
@@ -2457,6 +2462,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 </script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+        integrity="sha384-qCRjXwkgcbV6Wjr7+JzhoyEDqiXGHvMVzlPax8nGIp1ZbBo8bVrGdh62mtOh9H+9"
+        crossorigin="anonymous"></script>
+
 
 </body>
 </html>

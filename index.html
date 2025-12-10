@@ -1518,12 +1518,35 @@ letter-spacing: 0.02em;
 }
 
 /* 기존 .flip-card-back 바로 아래쪽에 추가하면 됨 */
+/* 기존 .flip-card-back 바로 아래쪽에 추가하면 됨 */
 .flip-card-back {
-  padding: 14px 16px;    /* 안쪽 여백 살짝 줄이기 (20px → 14~16px 정도) */
-  font-size: 0.9rem;     /* 글자 사이즈도 약간만 줄이기 */
-  line-height: 1.4;      /* 줄 간격 줄이기 (기존 1.5에서 감소) */
-  font-weight: 400;      /*너무 두껍지 않게 약간만 가볍게 */
+  background-color: #8BBB89;
+  color: white;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  transform: rotateY(180deg);
+  box-sizing: border-box;
+
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-weight: 400;
+  text-align: left;
+  flex-direction: column;
+
+  /* ✅ 핵심: 넘치면 세로 스크롤로 보여주기 */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+
+.flip-card-back p {
+  margin: 0.45rem 0;
+}
+
+.flip-card-back p:first-child {
+  margin-bottom: 0.7rem;
+  }
 
 /* 항목(p)끼리 간격 줄이기 */
 .flip-card-back p {

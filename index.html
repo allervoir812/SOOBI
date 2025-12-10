@@ -127,7 +127,17 @@ margin-left: 1.7rem;
 header { font-size: 1.5rem; }
 .flip-card { width: 90vw; height: 90vw; }
 }
+@media (max-width: 600px) {
+  .flip-card {
+    width: 90vw;
+    height: 110vw;      /* ✅ 카드 세로를 조금 더 길게 */
+  }
 
+  .flip-card-back {
+    font-size: 0.8rem;  /* ✅ 모바일에서 글자 살짝만 줄임 */
+    line-height: 1.4;
+  }
+}
 #image-popup,
 #image-popup-overlay {
 opacity: 0;
